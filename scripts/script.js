@@ -835,9 +835,10 @@ function siguienteTexto(){
 	
     htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
-    if (stateTexto >= arrayInstruc.length - 4) {
-        htmlContenido += '<br><textarea rows="10" cols="50" style="width: 100%;"></textarea>';
-    }
+    
+	if (stateTexto >= arrayInstruc.length - 6) {
+		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;"></textarea>`;
+	}
 
 	htmlBotones=arrayBoton[stateTexto];
 	
