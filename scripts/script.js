@@ -835,10 +835,11 @@ function siguienteTexto(){
 	
     htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
-    
+	
 	if (stateTexto >= arrayInstruc.length - 6 && stateTexto < arrayInstruc.length - 2) {
 		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;"></textarea>`;
 	}
+
 
 	htmlBotones=arrayBoton[stateTexto];
 	
@@ -859,7 +860,52 @@ function previoTexto(){
 function prepararTextos(){
 	if(grupoAsignado<2){ // Instrucciones para los grupos A1 y A2: 
 		//console.log("Preparando textos para grupo de ALTA");			//debug
-		arrayInstruc=[];
+		arrayInstruc=[
+			//0: (portada)  
+			"<h2 class=\"titulo\">ESTUDIO CVTD22XX2</h2><p>¡Muchas gracias por participar en esta investigación, no seria posible sin ti!</p><br><br>"
+			+ "<img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"img/uned.png\" width=\"200px\"><p>Sigue las instrucciones que encontrarás a continuación.</p>",
+				
+			// EXPERIMENTAL! Instrucciones para la fase previa
+			//2: Instrucciones 1
+			"<h3 class=\"titulo\">Instrucciones</h3><p align=\"left\">Imagina que eres un médico que trabaja en el laboratorio de investigación de una universidad. "
+			+ "Eres especialista en una enfermedad muy rara y peligrosa llamada "+ FaseTest.nombreSindrome+", que hay que tratar muy rápido en urgencias. "
+			+ "Las crisis que provoca esta enfermedad podrían curarse inmediatamente con una medicina llamada "+ FaseTest.nombreClave+".<br>",
+						
+			//3: Instrucciones 2.a 
+			"<h3 class=\"titulo\">Instrucciones</h3><p> Como parte de un experimento piloto de los ensayos clínicos para evaluar la efectividad del \"Batatrim\", "
+			+ "te vamos a presentar una serie de fichas médicas de pacientes que están sufriendo una crisis del \"Síndrome de Lindsay\". "
+			+ "<br><br>En cada ficha verás un paciente al que se ha administrado \"Batatrim\" y se te pedirá intentar predecir si va a superar la crisis o no. </p>",
+					
+			//4: Instrucciones 2.b 
+			"<h3 class=\"titulo\">Instrucciones</h3><p>El procedimiento será el siguiente: para cada nuevo paciente, debes intentar predecir si va a superar la crisis o no, "
+			+ "pulsando la imagen correspondiente de las dos siguientes.</p><br><br><table style=\"text-align: center; align-content: "
+			+ "center; border: 0px; width: 100%;\"><tr><td><img src=\""+FasePrevia.ImagenClave+"\" width=\"150px\"></td><td><img src=\""+FasePrevia.ImagenNOClave+"\" width=\"150px\"></td></tr><tr><td>"
+			+ "Va a superar la crisis</td><td>No va a superar la crisis</td></tr></table><br><br>",
+					
+			//5: Instrucciones 2.c 
+			"<p><h3 class=\"titulo\">Instrucciones</h3>A continuación te informaremos de si el paciente superó la crisis.</p>"
+			+ "<table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FasePrevia.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FasePrevia.ImagenSano+"\" width=\"150px\"></td></tr>"
+			+ "<tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><p> Después de darte esa información, se te presentará la ficha del siguiente paciente. "
+			+ "<br> Cuando hayas visto a un cierto número de pacientes pasaremos a la siguiente fase.</p>",
+					
+			//6: Instrucciones de la tarea de ALERGIAS 
+			"<p><h3 class=\"titulo\">Instrucciones</h3>Ya has terminado esta fase del estudio de "+FaseTest.nombreSindrome +". Como has visto, la tasa de recuperación de los pacientes que han recibido \"Batatrim\" ha sido "+FasePrevia.textoTransitAlta+". <br><br> Después de ver los resultados anteriores, se te ha invitado a participar en un nuevo experimento con un grupo de población distinto al del experimento piloto.</p>",
+		
+			//6: Instrucciones 1b Phase 2: 
+			"<p><h3 class=\"titulo\">Instrucciones</h3><p>Como parte de los ensayos clínicos para evaluar la efectividad del \"Batatrim\", te vamos a presentar una nueva serie de fichas médicas de pacientes que están sufriendo una crisis del \"Síndrome de Lindsay\". En cada ficha verás un paciente y se te dará la oportunidad de administrarle o no el \"Batatrim\". <br></p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenClave+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenNOClave+"\" width=\"150px\"></td></tr><tr><td>Administrar la medicina</td><td>No administrar la medicina</td></tr></table>",
+					
+			//7: Instrucciones 2 Phase 2
+			"<h3 class=\"titulo\">Instrucciones</h3><p>A continuación te informaremos de si el paciente superó la crisis. </p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenSano+"\" width=\"150px\"></td></tr><tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><br><p>Después de darte esa información, se te presentará la ficha del siguiente paciente. <br> Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
+					
+			// A guardar datos via Firebase!  
+			//13: Save Data...
+			"<h3 class=\"titulo\">Envío de datos</h3><p>A continuación podrás enviar los resultados para que se incluyan en nuestro estudio. Los datos que nos aportes se unirán a los del grupo y serán analizados estadísticamente.</p><p align=\"left\"> Para hacerlo, haz click en el botón \"Enviar\".</p>",
+					
+			//13:
+			"<h3 class=\"titulo\">Ya has terminado. ¡Muchas gracias por tu colaboración!</h3><p>El experimento que acabas de realizar está directamente relacionado con la materia explicada en el Capítulo 3 del libro “Psicología del Aprendizaje” que utilizas en tu asignatura del mismo nombre, concretamente con el concepto de “Contingencia” explicado en el apartado 2.1 de dicho capítulo. Para más información no dudes en ponerte en contacto con los autores del estudio.<br>"
+				+" <br>Autores:<br>Carlos Vera, Pedro Montoro, Cristina Orgaz y María José Contreras.</p>"
+				+ "<br><br> Pulsa F11 para salir del modo pantalla completa."
+		];
 	}
 	else if(grupoAsignado>3){ // Instrucciones para el grupo de CONTROL 
 
@@ -912,7 +958,43 @@ function prepararTextos(){
 	}
 	else{
 		//console.log("Preparando textos para grupo de BAJA");		 // Comentarios para debug
-		arrayInstruc=[];
+		arrayInstruc=[ // Instrucciones para los grupos B1 y B2: 
+			//0: (portada)  
+			"<h2 class=\"titulo\">ESTUDIO CVTD22XX2</h2><p>¡Muchas gracias por participar en esta investigación, no seria posible sin ti!</p><br><br><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"img/uned.png\" width=\"200px\"><p>Sigue las instrucciones que encontrarás a continuación.</p>",
+				
+			// EXPERIMENTAL! Instrucciones para la fase previa
+			//2: Instrucciones 1
+			"<h3 class=\"titulo\">Instrucciones</h3><p align=\"left\">Imagina que eres un médico que trabaja en el laboratorio de investigación de una universidad. Eres especialista en una enfermedad muy rara y peligrosa llamada "+ FaseTest.nombreSindrome+", que hay que tratar muy rápido en urgencias. Las crisis que provoca esta enfermedad podrían curarse inmediatamente con una medicina llamada "+ FaseTest.nombreClave+".<br>",
+						
+			//3: Instrucciones 2.a // 
+			"<h3 class=\"titulo\">Instrucciones</h3><p> Como parte de un experimento piloto de los ensayos clínicos para evaluar la efectividad del \"Batatrim\", te vamos a presentar una serie de fichas médicas de pacientes que están sufriendo una crisis del \"Síndrome de Lindsay\". <br><br>En cada ficha verás un paciente al que se ha administrado \"Batatrim\" y se te pedirá intentar predecir si va a superar la crisis o no. </p>",
+					
+			//4: Instrucciones 2.b 
+			"<h3 class=\"titulo\">Instrucciones</h3><p>El procedimiento será el siguiente: para cada nuevo paciente, debes intentar predecir si va a superar la crisis o no, pulsando la imagen correspondiente de las dos siguientes.</p><br><br>"
+			+ "<table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FasePrevia.ImagenClave+"\" width=\"150px\"></td><td><img src=\""+FasePrevia.ImagenNOClave+"\" width=\"150px\"></td></tr><tr><td>Va a superar la crisis</td><td>No va a superar la crisis</td></tr></table><br><br>",
+					
+			//5: Instrucciones 2.c // 
+			"<p><h3 class=\"titulo\">Instrucciones</h3>A continuación te informaremos de si el paciente superó la crisis.</p><table style=\"text-align: center; align-content: center; border:"
+			+ " 0px; width: 100%;\"><tr><td><img src=\""+FasePrevia.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FasePrevia.ImagenSano+"\" width=\"150px\"></td></tr><tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><p> Después de darte esa información, se te presentará la ficha del siguiente paciente.<br> Cuando hayas visto a un cierto número de pacientes pasaremos a la siguiente fase.</p>",
+					
+			//6: Instrucciones de la tarea de ALERGIAS
+			"<p><h3 class=\"titulo\">Instrucciones</h3>Ya has terminado esta fase del estudio de "+FaseTest.nombreSindrome +". Como has visto, la tasa de recuperación de los pacientes que han recibido \"Batatrim\" ha sido "+FasePrevia.textoTransitBaja+". <br><br> Después de ver los resultados anteriores, se te ha invitado a participar en un nuevo experimento con un grupo de población distinto al del experimento piloto.</p>",
+			
+			//6: Instrucciones 1b Phase 2:
+			"<p><h3 class=\"titulo\">Instrucciones</h3><p>Como parte de los ensayos clínicos para evaluar la efectividad del \"Batatrim\", te vamos a presentar una nueva serie de fichas médicas de pacientes que están sufriendo una crisis del \"Síndrome de Lindsay\". En cada ficha verás un paciente y se te dará la oportunidad de administrarle o no el \"Batatrim\". <br></p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenClave+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenNOClave+"\" width=\"150px\"></td></tr><tr><td>Administrar la medicina</td><td>No administrar la medicina</td></tr></table>",
+					
+			//7: Instrucciones 2 Phase 2
+			"<h3 class=\"titulo\">Instrucciones</h3><p>A continuación te informaremos de si el paciente superó la crisis. </p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenSano+"\" width=\"150px\"></td></tr><tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><br><p>Después de darte esa información, se te presentará la ficha del siguiente paciente. <br>Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
+					
+			// A guardar datos via Firebase!  
+			//13: Save Data...
+			"<h3 class=\"titulo\">Envío de datos</h3><p>A continuación podrás enviar los resultados para que se incluyan en nuestro estudio. Los datos que nos aportes se unirán a los del grupo y serán analizados estadísticamente.</p><p align=\"left\"> Para hacerlo, haz click en el botón \"Enviar\".</p>",
+					
+			//13:
+			"<h3 class=\"titulo\">Ya has terminado. ¡Muchas gracias por tu colaboración!</h3><p>El experimento que acabas de realizar está directamente relacionado con la materia explicada en el Capítulo 3 del libro “Psicología del Aprendizaje” que utilizas en tu asignatura del mismo nombre, concretamente con el concepto de “Contingencia” explicado en el apartado 2.1 de dicho capítulo. Para más información no dudes en ponerte en contacto con los autores del estudio.<br>"
+				+" <br>Autores:<br>Carlos Vera, Pedro Montoro, Cristina Orgaz y María José Contreras.</p>"
+				+ "<br><br> Pulsa F11 para salir del modo pantalla completa."
+		];
 	}
 	
 	if(grupoAsignado>3){
@@ -972,7 +1054,49 @@ function prepararTextos(){
 	}
 	else {
 		//console.log("Preparando textos para grupos B1 y B2");		 // Comentarios para debug
-		arrayBoton = [];
+		arrayBoton = [
+			//0:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='cuestionarioEdad()' value='Empezar'/>",
+			
+			//1:
+			//"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='cuestionarioEdad()' value='Continuar'/>",
+			
+			//2:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+			//3:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='previoTexto()' value='Atrás'/>"
+				+ "   <input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+
+			//4:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='previoTexto()' value='Atrás'/>"
+				+ "   <input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+			
+			//5:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='previoTexto()' value='Atrás'/>"
+				+"   <input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='showCue()' value='Comenzar'/>",
+			
+			//6a:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+
+			//6b:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='previoTexto()' value='Atrás'/>"
+				+ "   <input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+
+			
+			//7:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='previoTexto()' value='Atrás'/>"
+				+ "   <input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='showCue()' value='Comenzar'/>",
+			
+			//12:
+			//"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+
+			// A guardar datos! 
+			//13:
+			"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='saveData()' value='Enviar'/>",
+			
+			//14:
+			""
+			];
 	}
 }
 
@@ -1214,3 +1338,4 @@ function guardaFirebase(myData, target ){
     //firebase.database().ref('datoscontrol/').push(data); 								// MODO DEMO SIN CONEXIÓN
 	//console.log("Experimento realizado en modo DEMO. ¡Datos NO guardados!");			//debug
 }
+
