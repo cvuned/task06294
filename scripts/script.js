@@ -23,22 +23,7 @@ var testeo = 1;  // variable para reducir el número de ensayos durante el teste
 // Indicadores de estado para ver qué pregunta se lanza  
 var juiciorealizado = 0;
 var confianzaevaluada = 0;
-var riesgoevaluado = 0;
-var evidenciavaluado = 0; 
-var revisionValores = 0; // Variable de control para el check de los evidential values
 
-var evidenciaA = 999;
-var evidenciaB = 999;
-var evidenciaC = 999;
-var evidenciaD = 999;
-var valoresEvidentialSinOrden = [];				// Valores que van desordenados
-var valoresEvidentialRevisados = [];
-var tempOrden = ["a", "b", "c", "d"];
-var ordenEvidential = [];
-tempOrden = shuffle(tempOrden);
-
-// TFK comprobar que se ha guardado bien el orden y eliminar estas líneas
-//var ordenEvidential = ordenEvidential;			// Esta variable guarda el orden de las preguntas de Evidential value
 var alertcount = 0; 
 //variables demográficas:
 var Gender=""; 
@@ -324,9 +309,7 @@ var FaseTest = {
     secuenciaResps: [],
     Juicio: 999,
     Confianza: 999,
-	Riesgo: 999,
 	NPS: 999,
-	EvidentialValue: [999,999,999,999],
 	TiemposRespuesta: [],
 }
 
@@ -350,9 +333,7 @@ var FasePrevia = {
     secuenciaResps: [],
     Juicio: 999,
     Confianza: 999,
-	Riesgo: 999,
 	NPS: 999,
-	EvidentialValue: [999,999,999,999],
 	TiemposRespuesta: [],
 }
 
@@ -377,8 +358,6 @@ var FaseControl = {
 	secuenciaResps: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
 	Juicio: 999,
 	Confianza: 999,
-	Riesgo: 999,
-	EvidentialValue: [999,999,999,999],
 	TiemposRespuesta: [],
 	TiemposRespuesta: [999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999],
 }
@@ -818,31 +797,18 @@ function cambiafase(){
 	//guardaFirebase(startData, 'mySurvivalLogs');
 	
     if (grupoAsignado > 3){
-		FaseTest.EvidentialValue = [evidenciaA, evidenciaB, evidenciaC, evidenciaD]; 
-		//console.log("The evidential value is: "+FaseTest.EvidentialValue+", .");  		// Comentarios para debug
 		siguienteTexto();
 	}
 	else if(fase==0) {
         fase++;
         state=0; 
         
-
 		juiciorealizado=0;
 		npsEvaluada=0;
 		confianzaevaluada=0;
-		riesgoevaluado=0;
-		evidenciavaluado=0;
 
-		FaseTest.EvidentialValue = [evidenciaA, evidenciaB, evidenciaC, evidenciaD]; 
-		//console.log("The evidential value is: "+FaseTest.EvidentialValue+" without .");	 // Comentarios para debug
 		siguienteTexto();
      }
-	else{
-		FaseTest.EvidentialValue = [evidenciaA, evidenciaB, evidenciaC, evidenciaD]; 
-		//console.log("The evidential value is: "+FaseTest.EvidentialValue+" without.");  		// Comentarios para debug
-		siguienteTexto();
-	}
-
 }
 
 function ReseteoJuicios(){
@@ -866,11 +832,6 @@ function siguienteTexto(){
     ocultar(divContingencia);
     ocultar(divJuicio);
     ocultar(divCuestionariosEdad);
-
-	ocultar(divCheckEvidentialValueA);
-	ocultar(divCheckEvidentialValueB);
-	ocultar(divCheckEvidentialValueC);
-	ocultar(divCheckEvidentialValueD);
 	
     htmlContenido=arrayInstruc[stateTexto];
 	htmlBotones=arrayBoton[stateTexto];
@@ -879,11 +840,6 @@ function siguienteTexto(){
     pintarHTML("divBoton",htmlBotones);
 	//console.log("Estado de texto actual = " + stateTexto)		//debug
     stateTexto++;	
-
-	if(evidenciavaluado==4 && revisionValores==0){
-		revisionValores = 1;
-		checkEvidentialValues(); 
-	}
 
 }
 
@@ -934,19 +890,6 @@ function prepararTextos(){
 			//7: Instrucciones 2 Phase 2
 			"<h3 class=\"titulo\">Instrucciones</h3><p>A continuación te informaremos de si el paciente superó la crisis. </p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenSano+"\" width=\"150px\"></td></tr><tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><br><p>Después de darte esa información, se te presentará la ficha del siguiente paciente. <br> Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 					
-			//12: Momento de checkear los datos de Evidential Value: 
-//			"<h3 class=\"titulo\">Comprobación de datos</h3><p></p>"
-//			+ "<p>En las preguntas anteriores has dado estas  respuestas dependiendo de si el paciente: </p>"
-//			+ "<table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\">"
-//			+ "<tr><td>SÍ tomaba medicina y SÍ se recuperaba "+evidenciaA+"."
-//			+ "</td><td>SÍ tomaba medicina y NO se recuperaba: "+evidenciaB+".</td></tr>"
-//			+ "<tr><td>NO tomaba medicina y SÍ se recuperaba: "+evidenciaC+".</td>"
-//			+ "<td>NO tomaba medicina y NO se recuperaba: "+evidenciaD+".</td></tr></table>"
-//			+ "Si quieres cambiar alguna de las respuestas, puede introducir los valores a continuación: ",
-			//"<h3 class=\"titulo\">Comprobación de datos</h3><p></p>"
-			//+ "<p>En las 4 preguntas anteriores has dado estas  respuestas dependiendo de si al paciente le era administrado el Batatrim y si superaba o no la crisis. "
-			//+ "<br>Si quieres cambiar alguna de las respuestas, puede corregir los valores a continuación:</p>",
-
 			// A guardar datos via Firebase!  
 			//13: Save Data...
 			"<h3 class=\"titulo\">Envío de datos</h3><p>A continuación podrás enviar los resultados para que se incluyan en nuestro estudio. Los datos que nos aportes se unirán a los del grupo y serán analizados estadísticamente.</p><p align=\"left\"> Para hacerlo, haz click en el botón \"Enviar\".</p>",
@@ -990,12 +933,8 @@ function prepararTextos(){
 			+ "Paciente enfermo</td><td>Paciente curado</td></tr></table><p>Después de darte esa información, se te presentará la ficha del siguiente paciente. <br>"
 			+ "Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". "
 			+ "Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
-							
-			//12: Momento de checkear los datos de Evidential Value: 
-			//"<h3 class=\"titulo\">Comprobación de datos</h3><p></p>"
-			//+ "<p>En las 4 preguntas anteriores has dado estas  respuestas dependiendo de si al paciente le era administrado el Batatrim y si superaba o no la crisis. "
-			//+ "<br>Si quieres cambiar alguna de las respuestas, puede corregir los valores a continuación:</p>",
 
+							
 			// A guardar datos! 
 			//13: Save Data... 
 			"<h3 class=\"titulo\">Envío de datos</h3><p>A continuación podrás enviar los resultados para que se incluyan en nuestro estudio. Los datos que nos aportes se unirán a los del grupo y serán analizados estadísticamente.</p><p align=\"left\"> Para hacerlo, haz click en el botón \"Enviar\".</p>",
@@ -1036,11 +975,6 @@ function prepararTextos(){
 			//7: Instrucciones 2 Phase 2
 			"<h3 class=\"titulo\">Instrucciones</h3><p>A continuación te informaremos de si el paciente superó la crisis. </p><table style=\"text-align: center; align-content: center; border: 0px; width: 100%;\"><tr><td><img src=\""+FaseTest.ImagenSindrome+"\" width=\"150px\"></td><td><img src=\""+FaseTest.ImagenSano+"\" width=\"150px\"></td></tr><tr><td>Paciente enfermo</td><td>Paciente curado</td></tr></table><br><p>Después de darte esa información, se te presentará la ficha del siguiente paciente. <br>Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 					
-			//12: Momento de checkear los datos de Evidential Value: 
-			//"<h3 class=\"titulo\">Comprobación de datos</h3><p></p>"
-			//+ "<p>En las 4 preguntas anteriores has dado estas  respuestas dependiendo de si al paciente le era administrado el Batatrim y si superaba o no la crisis. "
-			//+ "<br>Si quieres cambiar alguna de las respuestas, puede corregir los valores a continuación:</p>",
-			
 			// A guardar datos via Firebase!  
 			//13: Save Data...
 			"<h3 class=\"titulo\">Envío de datos</h3><p>A continuación podrás enviar los resultados para que se incluyan en nuestro estudio. Los datos que nos aportes se unirán a los del grupo y serán analizados estadísticamente.</p><p align=\"left\"> Para hacerlo, haz click en el botón \"Enviar\".</p>",
@@ -1148,7 +1082,6 @@ function prepararTextos(){
 	}
 }
 
-
 //++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++
 //FUNCIONES DE CUESTTIONARIOS:
@@ -1180,42 +1113,6 @@ function cuestionarioEdad(){
     pintarHTML('divBoton', HTMLboton);
 }
 
-function checkEvidentialValues(){
-	
-	"<p>A continuación puedes cambiar los valores si lo consideras necesario: </p>";
-    mostrar(divCheckEvidentialValueA);
-	"<p>Tu respuesta en este caso fue: /p>";
-	mostrar(divCheckEvidentialValueB);
-	mostrar(divCheckEvidentialValueC);
-	mostrar(divCheckEvidentialValueD);
-
-	
-	document.querySelector('input[name="celdaA"]').value=evidenciaA;
-	document.querySelector('input[name="celdaB"]').value=evidenciaB;
-	document.querySelector('input[name="celdaC"]').value=evidenciaC;
-	document.querySelector('input[name="celdaD"]').value=evidenciaD;
-
-    var HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='validaEvidentialValues()' value='Continuar'/>";
-    pintarHTML('divBoton', HTMLboton);
-
-}
-
-function validaEvidentialValues(){	
-	temp1 = document.querySelector('input[name="celdaA"]').value; 
-	temp2 = document.querySelector('input[name="celdaB"]').value;
-	temp3 = document.querySelector('input[name="celdaC"]').value; 
-	temp4 = document.querySelector('input[name="celdaD"]').value;
-
-	if( temp1 > 100 || temp2 > 100 || temp3 > 100 || temp4 > 100) {
-        alert("Solo se admiten valores entre 0 y 100");
-    }
-
-	else { 
-		// Esta función va a recoger los valores modificados
-		valoresEvidentialRevisados = [document.querySelector('input[name="celdaA"]').value, document.querySelector('input[name="celdaB"]').value, document.querySelector('input[name="celdaC"]').value, document.querySelector('input[name="celdaD"]').value];
-		siguienteTexto();
-	}
-}
 function validaEdad(){
     if(
         // Esta condición exige que se respondan las preguntas de experiencia y edad	
@@ -1291,10 +1188,6 @@ function hideUnnecessaryElements() {
         'divTextos',
         'divContingencia',
         'divJuicio',
-        'divCheckEvidentialValueA',
-        'divCheckEvidentialValueB',
-        'divCheckEvidentialValueC',
-        'divCheckEvidentialValueD',
         'divPregInduccion'
     ];
 
@@ -1372,12 +1265,7 @@ function saveData(){
 			Age + "," +         		
 			Gender + "," +		
 			FaseTest.Juicio + "," + 				//Juicio 
-			FaseTest.Confianza + "," + 				//Confianza 
-			FaseTest.Riesgo + "," + 				//Riesgo 
-			FaseTest.EvidentialValue + "," +  		// Evidential value - respuestas dadas en un array ordenado
-			valoresEvidentialSinOrden + "," +  		// Evidential value - array en orden de respuesta
-			valoresEvidentialRevisados + "," +      // Evidential value - Valores después de la revisión
-			ordenEvidential + "," +  				// Orden de las respuestas de Evidential value
+			FaseTest.Confianza + "," + 				//Confianza
 			FaseTest.secuenciaResps + "," + 		//Secuencia de respuestas dada
 			FaseTest.posibleOutcomes + "," + 		//Secuencia de resultados de éxito presentada
 			FaseTest.secuenciaCells + "," + 		//Secuencia de combinaciones acción-éxito
@@ -1396,12 +1284,7 @@ function saveData(){
 			Age + "," +         		
 			Gender + "," +		
 			FaseTest.Juicio + "," + 				//Juicio 
-			FaseTest.Confianza + "," + 				//Confianza 
-			FaseTest.Riesgo + "," + 				//Riesgo 
-			FaseTest.EvidentialValue + "," +  		// Evidential value - respuestas dadas en un array ordenado
-			valoresEvidentialSinOrden + "," +  		// Evidential value - array en orden de respuesta
-			valoresEvidentialRevisados + "," +      // Evidential value - Valores después de la revisión
-			ordenEvidential + "," +  				// Orden de las respuestas de Evidential value
+			FaseTest.Confianza + "," + 				//Confianza
 			FaseTest.secuenciaResps + "," + 		//Secuencia de respuestas dada
 			FaseTest.posibleOutcomes + "," + 		//Secuencia de resultados de éxito presentada
 			FaseTest.secuenciaCells + "," + 		//Secuencia de combinaciones acción-éxito
@@ -1411,20 +1294,7 @@ function saveData(){
 			FaseTest.TiemposRespuesta + "," + 		//Tiempos de respuesta 
 			fecha
 	}
-    
-    ;
-    
-	// Así guardaba los partizipantes en el primer experimento, que solo tenía 2 tipos. Ahora me da que ya no me vale porque tengo 6. 
-	//if(group == "Experimental"){
-		//actualizarGrupo= grouplist[grupoAsignado]+1;
-		//firebase.database().ref('GrupoControlExp').set(actualizarGrupo);				// MODO DEMO SIN CONEXIÓN
-		//console.log("Un participante al grupo normal")				// debug
-	//}
-	//else {
-		//actualizarGrupo= grouplist[grupoAsignado]+1;
-		// firebase.database().ref('GrupoControlContrabalanceo').set(actualizarGrupo); 	// MODO DEMO SIN CONEXIÓN
-		//console.log("Un participante al grupo de contrabalanceo")		// debug
-	//}
+
 	// la siguiente línea guarda un vector con los participantes. 
 	// Recordatorio de cómo se lee: 
 	// grouplist = [grupoA1, grupoA2, grupoB1, grupoB2, grupoC1, grupoC2];
@@ -1433,8 +1303,6 @@ function saveData(){
 	//console.log("participantes: "+grouplist+".")			//debug
 	firebase.database().ref('participantesPorGrupo').set(grouplist)
 	//firebase.database().ref('participantes/porGrupo/participantesPorGrupo').set(grouplist)
-
-
 
     //console.log(data);      // Debug
     guardaFirebase(data,'datoscontrol/');
