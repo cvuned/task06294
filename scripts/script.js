@@ -1327,7 +1327,9 @@ function nextQuestion() {
 
 
 function saveData(){
+	console.log("We are now saving data!")
     showQuestion()
+	
     stringDate();
     
     var Fase1countCells = new Map([...new Set(FaseTest.secuenciaCells)].map(
