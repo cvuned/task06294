@@ -1286,6 +1286,27 @@ function stringDate() {
 }
 
 
+function hideUnnecessaryElements() {
+    const elementsToHide = [
+        'divTextos',
+        'divContingencia',
+        'divJuicio',
+        'divCheckEvidentialValueA',
+        'divCheckEvidentialValueB',
+        'divCheckEvidentialValueC',
+        'divCheckEvidentialValueD',
+        'divPregInduccion'
+    ];
+
+    elementsToHide.forEach(id => {
+        let element = document.getElementById(id);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+}
+
+
 let questions = [
     'Question 1',
     'Question 2',
@@ -1297,7 +1318,7 @@ let shouldShowOptionalQuestion = false; // Set this to true based on the partici
 
 function showQuestion() {
 	console.log("We are now showing question!")
-
+	hideUnnecessaryElements();
     if (questionIndex < questions.length) {
         let question = questions[questionIndex];
         let questionHTML = `
@@ -1326,6 +1347,7 @@ function nextQuestion() {
     questionIndex++;
     showQuestion();
 }
+
 
 
 function saveData(){
