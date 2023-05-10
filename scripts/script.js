@@ -1296,6 +1296,8 @@ let questionIndex = 0;
 let shouldShowOptionalQuestion = false; // Set this to true based on the participants' performance
 
 function showQuestion() {
+	console.log("We are now showing question!")
+
     if (questionIndex < questions.length) {
         let question = questions[questionIndex];
         let questionHTML = `
@@ -1329,7 +1331,7 @@ function nextQuestion() {
 function saveData(){
 	console.log("We are now saving data!")
     showQuestion()
-	
+
     stringDate();
     
     var Fase1countCells = new Map([...new Set(FaseTest.secuenciaCells)].map(
