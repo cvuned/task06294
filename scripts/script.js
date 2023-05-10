@@ -834,6 +834,11 @@ function siguienteTexto(){
     ocultar(divCuestionariosEdad);
 	
     htmlContenido=arrayInstruc[stateTexto];
+    // Check if the current state is one of the custom questions
+    if (stateTexto >= arrayInstruc.length - 4) {
+        htmlContenido += '<br><textarea rows="10" cols="50" style="width: 100%;"></textarea>';
+    }
+
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
@@ -934,6 +939,10 @@ function prepararTextos(){
 			+ "Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". "
 			+ "Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 
+			"Question 1: Please describe your experience during the task.",
+		    "Question 2: How did you decide which patients to give Batatrim?",
+		    "Question 3: What strategies did you use to make your decisions?",
+ 	   		"Question 4: Were there any difficulties you faced during the task?",
 							
 			// A guardar datos! 
 			//13: Save Data... 
@@ -1024,6 +1033,13 @@ function prepararTextos(){
 			
 			//12:
 			//"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
+			
+			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
+		    "<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
+    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
+    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='saveData()' value='Submit'/>",
+
+
 
 			// A guardar datos! 
 			//13:
@@ -1200,52 +1216,52 @@ function hideUnnecessaryElements() {
 }
 
 
-let questions = [
-    'Question 1',
-    'Question 2',
-    'Question 3',
-    'Question 4'
-];
-let questionIndex = 0;
-let shouldShowOptionalQuestion = false; // Set this to true based on the participants' performance
+//let questions = [
+//    'Question 1',
+//    'Question 2',
+//    'Question 3',
+//    'Question 4'
+//];
+//let questionIndex = 0;
+//let shouldShowOptionalQuestion = false; // Set this to true based on the participants' performance
 
-function showQuestion() {
-	console.log("We are now showing question!")
-	hideUnnecessaryElements();
-    if (questionIndex < questions.length) {
-        let question = questions[questionIndex];
-        let questionHTML = `
-            <p>${question}</p>
-            <textarea id="question${questionIndex}" name="question${questionIndex}" rows="6" cols="50"></textarea>
-        `;
-        pintarHTML('divCuestionariosEdad', questionHTML);
-
-        let HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='nextQuestion()' value='Continuar'/>";
-        pintarHTML('divBoton', HTMLboton);
-    } else {
+//function showQuestion() {
+//	console.log("We are now showing question!")
+//	hideUnnecessaryElements();
+//    if (questionIndex < questions.length) {
+//        let question = questions[questionIndex];
+//        let questionHTML = `
+//            <p>${question}</p>
+//            <textarea id="question${questionIndex}" name="question${questionIndex}" rows="6" cols="50"></textarea>
+//        `;
+//        pintarHTML('divCuestionariosEdad', questionHTML);
+//
+//        let HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='nextQuestion()' value='Continuar'/>";
+//        pintarHTML('divBoton', HTMLboton);
+//    } else {
         // Handle the end of the questionnaire
-        if (shouldShowOptionalQuestion) {
+//        if (shouldShowOptionalQuestion) {
             // Display the optional question
             // After the optional question, you may want to call a function to process the responses
-        } else {
+//        } else {
             // Proceed without the optional question, and call a function to process the responses
-        }
-    }
-}
+//        }
+//    }
+//}
 
-function nextQuestion() {
+//function nextQuestion() {
     // Here, you can add code to validate the response and store it
 
     // Increment the question index and show the next question
-    questionIndex++;
-    showQuestion();
-}
+//    questionIndex++;
+//    showQuestion();
+//}
 
 
 
 function saveData(){
 	console.log("We are now saving data!")
-    showQuestion()
+    //showQuestion()
 
     stringDate();
     
