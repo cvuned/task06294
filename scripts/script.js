@@ -558,15 +558,6 @@ function showOutcome(){
             if(training[fase].posibleOutcomes[state]==1) {
                 imgOutcome = training[fase].ImagenSano;
 				textoOutcome = "<br><p class=\"mensaje\">¡El paciente ha superado la crisis!</p>";
-				// Comentado el bloque que daba diferente texto por fases
-				//if(training[fase] == FasePrevia){ 
-				//
-				//	textoOutcome = "<br><p class=\"mensaje\">¡El problema ha sido resuelto!</p>";
-				//}
-				//else if(training[fase] == FaseTest){
-				//
-				//	textoOutcome = "<br><p class=\"mensaje\">¡El paciente ha superado la crisis!</p>";
-				//}		
 				training[fase].secuenciaCells.push("a");
                 //console.log(" debug: cell a");
             }
@@ -575,16 +566,6 @@ function showOutcome(){
 			//else if(training[fase].posibleOutcomes[state]==0){
                 imgOutcome = training[fase].ImagenSindrome;
 				textoOutcome = "<br><p class=\"mensajeMALO\">¡El paciente NO ha superado la crisis!</p>";
-				// Comentado el bloque que daba diferente texto por fases
-				//if(training[fase] == FasePrevia){ 
-				//
-				//	textoOutcome = "<br><p class=\"mensajeMALO\">¡El problema NO ha sido resuelto!</p>";
-				//}
-				//else if(training[fase] == FaseTest){
-				//
-	            //    textoOutcome = "<br><p class=\"mensajeMALO\">¡El paciente NO ha superado la crisis!</p>";
-				//}		
-    
                 training[fase].secuenciaCells.push("b");
                 //console.log(" debug: cell b");
             }
@@ -677,16 +658,7 @@ function ITI(){
 function showJuicio(){
     ocultar(divContingencia);
     ocultar(divTextos);
-
 	
-	// Se deja comentado por si hay que segregar por fases: 
-    //if(training[fase] == FasePrevia){ 
-	//	textoJuicio= "<p class=\"pregunta\">¿Hasta qué punto crees que el recalibrado es efectivo para resolver los comportamientos erráticos de los sensores de ángulo de ataque?</p>";
-	//}
-	//lse if(training[fase] == FaseTest){
-	//	textoJuicio= "<p class=\"pregunta\">¿Hasta qué punto crees que el "+
-	//		training[fase].nombreClave+" es efectivo para curar las crisis del "+training[fase].nombreSindrome+"?</p>";
-	//}
 	textoJuicio= "<p class=\"pregunta\">¿Hasta qué punto crees que el "+
 			training[fase].nombreClave+" es efectivo para curar las crisis del "+training[fase].nombreSindrome+"?</p>";
 	
@@ -714,7 +686,7 @@ function showJuicio(){
 
 function showNPS(){
 	// Esta nueva función va a dar a evaluar el NPS de 1 a 10.
-	// para ello reutilizamos la confiaaza pero voy a ver si al mostrar el resultado puedo mostrar redondeado a 10 
+	// para ello reutilizamos la confianza pero voy a ver si al mostrar el resultado puedo mostrar redondeado a 10 
 	ocultar(divContingencia);
     ocultar(divTextos);
  
@@ -743,13 +715,6 @@ function showConfianza(){
     ocultar(divContingencia);
     ocultar(divTextos);
 
-	//textoConfianza= "<p class=\"pregunta\">¿Hasta qué punto estás seguro de tu respuesta sobre la efectividad del "+training[fase].nombreClave+"?</p>";
-	//textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: He respondido al azar.</li><li>100: Completamente seguro.</li></ul><p>Puedes hacer clic dentro de la escala tantas veces como desees hasta marcar el valor que consideres más adecuado. Cualquier valor entre 0 y 100 es válido. También puedes usar las flechas del teclado (izquierda / derecha) para ajustar el valor de la respuesta con más precisión.</p><br><br>";
-	//textoConfianza = textoConfianza.concat(textoInstrucciones);
-	//pintarHTML('divPregunta', textoConfianza);
-
-	
-
 	textoConfianza= "<p class=\"pregunta\">En una escala del 0 al 10, ¿cómo de probable es que recomendaras a un paciente tomar "+training[fase].nombreClave+"?</p>";
 	textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: No lo recomendaría en absoluto.</li><li>10: Lo recomendaría con total seguridad.</li></ul><p>Ignora las etiquetas (50 - 100) de la escala y asume que es una escala de 0 a 10.</p><br><br>";
 	textoConfianza = textoConfianza.concat(textoInstrucciones);
@@ -770,112 +735,6 @@ function showConfianza(){
     setTimeout('mostrar(divBoton)', 100);    
 }
 
-function showRiesgo(){
-    ocultar(divContingencia);
-    ocultar(divTextos);
-    
-	//if(training[fase] == FasePrevia){ 
-	//	textoRiesgo= "<p class=\"pregunta\">¿Qué nivel de riesgo has considerado que tenían tus decisiones para la seguridad de la aeronave?</p>";
-	//}
-	//else if(training[fase] == FaseTest){
-	//	textoRiesgo= "<p class=\"pregunta\">¿Qué nivel de riesgo has considerado que tenían tus decisiones para la salud de los pacientes?</p>";
-	//}
-	textoRiesgo= "<p class=\"pregunta\">¿Qué nivel de riesgo has considerado que tenían tus decisiones para la salud de los pacientes?</p>";
-	textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: Ningún riesgo.</li><li>100: Riesgo catastrófico.</li></ul><p>Puedes hacer clic dentro de la escala tantas veces como desees hasta marcar el valor que consideres más adecuado. Cualquier valor entre 0 y 100 es válido. También puedes usar las flechas del teclado (izquierda / derecha) para ajustar el valor de la respuesta con más precisión.</p><br><br>";
-	textoRiesgo = textoRiesgo.concat(textoInstrucciones);
-
-	pintarHTML('divPregunta', textoRiesgo);
-    
-    document.getElementById("sliderJuicio").classList.add('sliderCONTPrimero');
-
-    ReseteoJuicios();
-    
-    document.getElementById("textInput").disabled = true;
-    document.getElementById("textInput").value = "";
-
-    
-    textoBoton="<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='validaJuicio()' value='Confirmar'/>";
-    pintarHTML('divBoton', textoBoton);
-    
-    mostrar(divJuicio);
-    setTimeout('mostrar(divBoton)', 100);
-    
-
-}
-
-function showEvidentialValue(){
-	
-	//console.log("Vamos a ver que el orden de Evidential Value se haya hecho aleatorio de forma correcta:");			//debug
-	//console.log(tempOrden);																							//debug
-
-	tomaOno = "";
-    recuperaOno = "";
-	//while(tempOrden.length){  // Checks if tempOrden is empty --> False si está vacío, en ese momento tendremos que salir del bucle
-	//	pregunta = tempOrden.pop()
-	//}
-
-
-	ocultar(divContingencia);
-	ocultar(divTextos);
-	pregunta = tempOrden.pop()
-	//console.log("Vamos a ver que efectivamente estamos eliminando opciones"); //debug
-	//console.log(tempOrden);													//debug
-
-	if (pregunta == "a"){
-		tomaOno = "le fue administrado \"Batatrim\"";
-		recuperaOno = "superó la crisis";
-		Clarificar1 = FaseTest.ImagenClave;
-		Clarificar2 = FaseTest.ImagenSano;
-		ordenEvidential.push(pregunta);
-	}
-	else if (pregunta == "b"){
-		tomaOno = "le fue administrado \"Batatrim\"";
-		recuperaOno = "NO superó la crisis";
-		Clarificar1 = FaseTest.ImagenClave;
-		Clarificar2 = FaseTest.ImagenSindrome;
-		ordenEvidential.push(pregunta);
-	}
-	else if (pregunta == "c"){
-		tomaOno = "NO le fue administrado \"Batatrim\"";
-		recuperaOno = "superó la crisis";
-		Clarificar1 = FaseTest.ImagenNOClave;
-		Clarificar2 = FaseTest.ImagenSano;
-		ordenEvidential.push(pregunta);
-	}
-	else if (pregunta == "d"){
-		tomaOno = "NO le fue administrado \"Batatrim\"";
-		recuperaOno = "NO superó la crisis";
-		Clarificar1 = FaseTest.ImagenNOClave;
-		Clarificar2 = FaseTest.ImagenSindrome;
-		ordenEvidential.push(pregunta);
-	}
-	textoEvidentialValue= "<p class=\"pregunta\">A veces has visto que el paciente "+tomaOno +" y "+recuperaOno+". " 
-		+"¿Consideras que estos casos son importantes para determinar la eficacia del \"Batatrim\"?<br>"
-		+ "<table style=\"text-align: center; align-content:center; border: 0px; width: 100%;\"><tr><td><img src=\""+Clarificar1+"\" width=\"150px\"></td><td><img src=\""+Clarificar2+"\" width"
-		+ "=\"150px\"></td></tr></table></p>";
-	//	+ "=\"150px\"></td></tr><tr><td>Administrar la medicina</td><td>No administrar la medicina</td></tr></table></p>";
-	
-	// Estas dos líneas ya son un poco redundantes
-	textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: Ocurre por casualidad.</li><li>100: Podemos considerarlo evidencia científica.</li></ul>";
-	textoEvidentialValue = textoEvidentialValue.concat(textoInstrucciones);
-
-	pintarHTML('divPregunta', textoEvidentialValue);
-	
-	document.getElementById("sliderJuicio").classList.add('sliderCONTPrimero');
-
-	ReseteoJuicios();
-		
-	document.getElementById("textInput").disabled = true;
-	document.getElementById("textInput").value = "";
-
-	// tempEvidentialValue = document.getElementById('textInput').value // <-- así se guarda el valor que da el participante de validaJuicio
-	// Aquí hay que hacer que mientras no tengamos las cuatro preguntas no lance valida juicio
-	textoBoton="<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='validaJuicio()' value='Confirmar'/>";
-	pintarHTML('divBoton', textoBoton);
-		
-	mostrar(divJuicio);
-	setTimeout('mostrar(divBoton)', 100);
-}
 
 // Esta es la función que actualiza el valor según lo que se marca en a escala
 function updateTextInput(val) {
@@ -1290,8 +1149,6 @@ function prepararTextos(){
 }
 
 
-
-
 //++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++
 //FUNCIONES DE CUESTTIONARIOS:
@@ -1321,7 +1178,6 @@ function cuestionarioEdad(){
 	///////
     var HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='validaEdad()' value='Continuar'/>";
     pintarHTML('divBoton', HTMLboton);
-
 }
 
 function checkEvidentialValues(){
@@ -1430,8 +1286,48 @@ function stringDate() {
 }
 
 
+let questions = [
+    'Question 1',
+    'Question 2',
+    'Question 3',
+    'Question 4'
+];
+let questionIndex = 0;
+let shouldShowOptionalQuestion = false; // Set this to true based on the participants' performance
+
+function showQuestion() {
+    if (questionIndex < questions.length) {
+        let question = questions[questionIndex];
+        let questionHTML = `
+            <p>${question}</p>
+            <textarea id="question${questionIndex}" name="question${questionIndex}" rows="6" cols="50"></textarea>
+        `;
+        pintarHTML('divCuestionariosEdad', questionHTML);
+
+        let HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='nextQuestion()' value='Continuar'/>";
+        pintarHTML('divBoton', HTMLboton);
+    } else {
+        // Handle the end of the questionnaire
+        if (shouldShowOptionalQuestion) {
+            // Display the optional question
+            // After the optional question, you may want to call a function to process the responses
+        } else {
+            // Proceed without the optional question, and call a function to process the responses
+        }
+    }
+}
+
+function nextQuestion() {
+    // Here, you can add code to validate the response and store it
+
+    // Increment the question index and show the next question
+    questionIndex++;
+    showQuestion();
+}
+
+
 function saveData(){
-    
+    showQuestion()
     stringDate();
     
     var Fase1countCells = new Map([...new Set(FaseTest.secuenciaCells)].map(
