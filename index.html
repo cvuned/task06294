@@ -1,187 +1,107 @@
+<!DOCTYPE html>
 <html>
-
-	<head>
-  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-		 <title>Exp 06293</title>
-		 <link rel="stylesheet" type="text/css" href="css/style.css">
-		 <script type="text/javascript" src="scripts/script.js"></script>
-        
-<!-- The core Firebase JS SDK is always required and must be listed first 
-<script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>        -->
-
-<!-- COMPATIBILIDAD Firebase 8 con 9: -->
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script type="module">
-
-    //Esto igual no es necesario 
-    //import { initializeApp } from "firebase/compat/app"; // OLD
-    //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js";
-    //import firebase from 'firebase/app';
-  
-    //import { getAnalytics } from "firebase/analytics";
-    // Your web app's Firebase configuration
+<head>
+  <meta charset="UTF-8">
+  <title>Exp 06293</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="scripts/script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+  <script>
     const firebaseConfig = {
-        apiKey: "AIzaSyCXP0XBYav8Qqz82dICinOBhgx2DPV_W2g",
-        authDomain: "exp06293.firebaseapp.com",
-        databaseURL: "https://exp06293-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "exp06293",
-        storageBucket: "exp06293.appspot.com",
-        messagingSenderId: "702203375001",
-        appId: "1:702203375001:web:97450229d17f52dd99f708"
+      apiKey: "AIzaSyCm3nczbg0gPZty3hpg9FybXHvtHSfdfxI",
+      authDomain: "exp06294.firebaseapp.com",
+      databaseURL: "https://exp06294-default-rtdb.europe-west1.firebasedatabase.app/",
+      projectId: "exp06294",
+      storageBucket: "exp06294.appspot.com",
+      messagingSenderId: "64606244682",
+      appId: "1:64606244682:web:a739da45204ce87e2d3bb3"
     };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);     // MODO DEMO
-    //const firebase = initializeApp(firebaseConfig); // TFK añadido en TS
-    //analytics = getAnalytics(app);
-</script>
-	
-	</head>
-	<body onload="arranca()">
-
-        <div id= "divContenedor">
-            <div id="divContenido">
-                <div id="divTextos">
-                    
-                </div>
-                
-                <div id="divContingencia">
-                    <div id="divRegistro" class="ContingenciasFadeIn">
-                        
-                        <br>
-                        <br>
-                    </div>
-                    <div id="divPreStatus" class="columnBig ContingenciasFadeIn">
-                        <img src="img/Nooutcome.png" width="250px">
-                        <br><br>
-                        <p class="mensaje">Este Paciente tiene una crisis.</p>
-                        <p class="mensaje">¿Quieres administrar Batatrim?</p>
-                    </div>
-                    <div id="divEleccion" class="columnSmall ContingenciasFadeIn">
-                        <div > 
-                            <!--<button id="botonYES" value="YES" class="botonEleccion" onclick='respuestaYES()'>
-                                <img src="img/BatatrimBoton.png" width=150px class="icon icon_hover" id="imagenYES">
-                            </button>
-                        </div>
-                        <div >
-                            <button id="botonNO" value="NO" class="botonEleccion" onclick='respuestaNO()'>
-                                <img src="img/noBatatrimBoton.png" width=150px  class="icon icon_hover" id="imagenNO">
-                            </button>-->                           
-                        </div>
-                    </div>
-                    <div id="divOutcome" class="columnBig ContingenciasFadeIn">
-                        <!--<img src="img/outcome.png" width=250px>
-                        <br><br>
-                        <p class="mensaje">¡El paciente se ha curado!</p>-->
-                    </div>
-                </div>
-                
-                <div id="divJuicio">
-                    <div id="divPregunta"></div>
-					
-					<!-- <div> -->
-                        <!-- <p align="left">Responde usando la siguiente escala, donde los números se interpretan así:</p> -->
-                        <!-- <ul> -->
-                        <!-- <li>0: Nada efectivo.</li> -->
-                        <!-- <li>50: Moderadamente efectivo.</li> -->
-                        <!-- <li>100: Perfectamente efectivo.</li> -->
-                        <!-- </ul> -->
-                        <!-- <p align="left">Puedes hacer clic dentro de la escala tantas veces como desees hasta marcar el valor que consideres más adecuado. Cualquier valor entre 0 y 100 es válido.</p><br><br> -->
-                    <!-- </div> -->
-                    
-				
-					<div class="wrapSeparadores">                
-                        <div class="separador1">0<br>|</div>
-                        <div class="separador2">50<br>|</div>
-                        <div class="separador3">100<br>|</div>
-                        <!-- <script>
-                            const m = document.querySelectorAll("separador3");
-                            m.innerHTML = updateLimit();
-                        </script>  -->
-	                </div>                            
-                    <div id="divSlider">
-                        <input type="range" class="sliderCONT" name="sliderJuicio" id="sliderJuicio" value="50" min="0" max=updateLimit() onchange="updateTextInput(this.value);">
-                    </div>    
-                   <div id="valores" style="text-align: left; vertical-align:middle;">
-                        Tu respuesta:         <input type="text" id="textInput" value="" style="border: 0px; width: 50px;" class="values">
-                    </div>
-                </div>
-
-                <div id="divCuestionariosEdad" class="cuestionarios">
-					<br>
-					Edad:
-					<br>       
-					<input type=number name="edad" min="1">
-                    <br>
-                    <br>
-                    <br>
-                    Género:       
-                    <label class=containerRadios>Hombre
-                        <input type=radio name="gender" value="Hombre" >
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class=containerRadios>Mujer
-                        <input type=radio name="gender" value="Mujer" >
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class=containerRadios>Otros / Prefiero no responder
-                        <input type=radio name="gender" value="Otros" >
-                        <span class="checkmark"></span>
-                    </label> 
-                    <br><br><br>
-                </div>
-
-                <div id="divCheckEvidentialValueA" class="cuestionarioCheckeos">
-					El paciente SÍ tomaba la medicina y SÍ superaba la crisis: 
-					<input type=number name="celdaA" min="0" max="100"> 
-                </div>
-                <div id="divCheckEvidentialValueB" class="cuestionarioCheckeos">   
-                    El paciente SÍ tomaba la medicina y NO superaba la crisis: 
-					<input type=number name="celdaB" min="0" max="100">
-                </div>
-                <div id="divCheckEvidentialValueC" class="cuestionarioCheckeos">
-                    El paciente NO tomaba la medicina y SÍ superaba la crisis:    
-					<input type=number name="celdaC" min="0" max="100">
-                </div>
-                <div id="divCheckEvidentialValueD" class="cuestionarioCheckeos">
-                    El paciente NO tomaba la medicina y NO superaba la crisis:    
-					<input type=number name="celdaD" min="0" max="100">
-                </div>
-                <div id="divPregInduccion" class="cuestionarios">
-                    <p class="mensaje"> ¡Bienvenido!</p>
-					<p>Antes de nada queremos agradecer tu participación en este experimento, ya que sin la colaboración de personas como tú no sería posible esta investigación. No tienes que identificarte, y los datos que nos aportes se unirán a los del total del grupo y serán analizados estadísticamente. Tu participación es voluntaria y anónima.<br><br> <a href="https://docs.google.com/document/d/1dsnYKCNG9OOookRCY_iAq6Yd5p5JIaeAvw8jPmniDHc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Pulsa aquí para acceder a la hoja de información y consentimiento informado.</a> </p>
-						<ul> 
-                        <li>Intenta realizar esta tarea sin interrupciones ni parar para continuar más tarde.</li> 
-                        <li>Intenta realizar esta tarea en un lugar tranquilo y sin otras pantallas.</li> 
-                        <li>Intenta evitar las distracciones mientras realizas esta tarea.</li> 
-                        </ul> 
-					<p>Si tras haber leído el mensaje deseas continuar, pulsa para dar el consentimiento y pulsa en el botón 'Aceptar y continuar'.</p>
-                    
-                    <label class=containerRadios> He leído la hoja de consentimiento informado y estoy de acuerdo.
-                        <input type=radio name="induccion1" value="0" >
-                        <span class="checkmark"></span>
-                    </label><br><br>
-                </div>
-                
-                
-
-                <div id="divBoton">
-                    
-                </div>                
-            </div>
-
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+<body onload="arranca()">
+  <div id="divContenedor">
+    <div id="divContenido">
+      <div id="divTextos"></div>
+      <div id="divContingencia">
+        <div id="divRegistro" class="ContingenciasFadeIn"></div>
+        <div id="divPreStatus" class="columnBig ContingenciasFadeIn">
+          <img src="img/Nooutcome.png" width="250">
+          <p class="mensaje">Este Paciente tiene una crisis.</p>
+          <p class="mensaje">¿Quieres administrar Batatrim?</p>
         </div>
-			
-		
-	</body>
+        <div id="divEleccion" class="columnSmall ContingenciasFadeIn"></div>
+        <div id="divOutcome" class="columnBig ContingenciasFadeIn"></div>
+      </div>
+      <div id="divJuicio">
+        <div id="divPregunta"></div>
+        <div class="wrapSeparadores">                
+          <div class="separador1">0<br>|</div>
+          <div class="separador2">50<br>|</div>
+          <div class="separador3">100<br>|</div>
+        </div>                            
+        <div id="divSlider">
+          <input type="range" class="sliderCONT" name="sliderJuicio" id="sliderJuicio" value="50" min="0" max=updateLimit() onchange="updateTextInput(this.value);">
+        </div>    
+        <div id="valores" style="text-align: left; vertical-align:middle;">
+          Tu respuesta: <input type="text" id="textInput" value="" style="border: 0px; width: 50px;" class="values">
+        </div>
+      </div>
+      <div id="divCuestionariosEdad" class="cuestionarios">
+        <br>Edad:<br>
+        <input type="number" name="edad" min="1">
+        <br><br>Género:
+        <label class="containerRadios">Hombre
+          <input type="radio" name="gender" value="Hombre">
+          <span class="checkmark"></span>
+        </label>
+        <label class="containerRadios">Mujer
+          <input type="radio" name="gender" value="Mujer">
+          <span class="checkmark"></span>
+        </label>
+        <label class="containerRadios">Otros / Prefiero no responder
+          <input type="radio" name="gender" value="Otros">
+          <span class="checkmark"></span>
+        </label>
+        <br><br><br>
+      </div>
+      <div id="divCheckEvidentialValueA" class="cuestionarioCheckeos">
+        El paciente SÍ tomaba la medicina y SÍ superaba la crisis:
+        <input type="number" name="celdaA" min="0" max="100">
+      </div>
+      <div id="divCheckEvidentialValueB" class="cuestionarioCheckeos">
+        El paciente SÍ tomaba la medicina y NO superaba la crisis:
+        <input type="number" name="celdaB" min="0" max="100">
+      </div>
+      <div id="divCheckEvidentialValueC" class="cuestionarioCheckeos">
+        El paciente NO tomaba la medicina y SÍ superaba la crisis:
+        <input type="number" name="celdaC" min="0" max="100">
+      </div>
+      <div id="divCheckEvidentialValueD" class="cuestionarioCheckeos">
+        El paciente NO tomaba la medicina y NO superaba la crisis:
+        <input type="number" name="celdaD" min="0" max="100">
+      </div>
+      <div id="divPregInduccion" class="cuestionarios">
+        <p class="mensaje">¡Bienvenido!</p>
+        <p>Antes de nada queremos agradecer tu participación en este experimento, ya que sin la colaboración de personas como tú no sería posible esta investigación. No tienes que identificarte, y los datos que nos aportes se unirán a los del total del grupo y serán analizados estadísticamente. Tu participación es voluntaria y anónima.<br><br> <a href="https://docs.google.com/document/d/1dsnYKCNG9OOookRCY_iAq6Yd5p5JIaeAvw8jPmniDHc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Pulsa aquí para acceder a la hoja de información y consentimiento informado.</a> </p>
+        <ul>
+          <li>Intenta realizar esta tarea sin interrupciones ni parar para continuar más tarde.</li>
+          <li>Intenta realizar esta tarea en un lugar tranquilo y sin otras pantallas.</li>
+          <li>Intenta evitar las distracciones mientras realizas esta tarea.</li>
+        </ul>
+        <p>Si tras haber leído el mensaje deseas continuar, pulsa para dar el consentimiento y pulsa en el botón 'Aceptar y continuar'.</p>
+        <label class="containerRadios"> He leído la hoja de consentimiento informado.
+            <input type=radio name="induccion1" value="0" >
+            <span class="checkmark"></span>
+        </label><br><br>
+    </div>
+    <div id="divBoton">  
+    </div>                
+</div>
+</div>
+</body>
 
-</html>
+
