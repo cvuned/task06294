@@ -17,8 +17,8 @@ var fecha="";           //contendrá la fecha/hora.
 var Cuestionario=[];    //contiene las respuestas al cuestionario de generalizacion
 var t0 = 0; 
 var t1 = 0; 
-//var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
-var testeo = 0;  
+var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
+//var testeo = 0;  
 
 // Indicadores de estado para ver qué pregunta se lanza  
 var juiciorealizado = 0;
@@ -144,9 +144,21 @@ function arranca(){
 	// CARGA la base de datos: 
 	firebase.database().ref().on("value", gotData, errData); 	// TFK - MODO DEMO SIN CONEXIÓN
 	
-	//Ver IP
-	//PartIP = myip; //Modified for testing TFK
-	//console.log("my IP is: "+PartIP+"."); //debug
+	// Carga de la IP del usuario:
+	async function getUserIP() {
+		try {
+		  const response = await fetch('https://api.ipify.org?format=json');
+		  const data = await response.json();
+		  const userIP = data.ip;
+		  console.log('User IP:', userIP);
+		  return userIP;
+		} catch (error) {
+		  console.error('Error fetching IP:', error);
+		}
+	  }
+	  
+	getUserIP();
+
 	
 	function gotData(data) { 
 			
