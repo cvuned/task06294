@@ -855,10 +855,9 @@ function siguienteTexto(){
     // Check if the current state is one of the custom questions
 	
     if (stateTexto >= arrayInstruc.length - 7) {
-		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
-	        var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
-    	    var answerElement = document.getElementById(answerElementId);
-		}
+		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
+    	var answerElement = document.getElementById(answerElementId);
+
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
 			console.log("Estoy guardando la respuesta");
