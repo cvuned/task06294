@@ -613,9 +613,14 @@ function ITI(){
         setTimeout("showCue()", 100);
 		
 		// Aquí vamos a ir haciendo capturas
-		if(state % 10 == 0){
+		if(state % FaseTest.numTrials == 0){
 			startData = "A participant with ID " + personId +","+ "reached state:"+ ","+ state +","+ stringDate();
-			guardaFirebase(startData, 'mySurvivalLogs');
+			if (testeo == 0){
+				guardaFirebase(startData, 'mySurvivalLogs');				
+			}
+			else {
+				console.log(startData);
+			}
 		}
     }
      else if(state==training[fase].numTrials-1){
@@ -1181,7 +1186,12 @@ function cuestionarioEdad(){
 	/////// Aquí vamos a aprovechar para enviar a Firebase los datos de nuestro participante
 	// Esta línea nos guarda el intento: 
 	startData = "A participant has started with ID " + personId +","+ stringDate();
-	guardaFirebase(startData, 'mySurvivalLogs');
+	if (testeo == 0){ 
+		guardaFirebase(startData, 'mySurvivalLogs');
+	}
+	else{
+		console.log(startData);
+	}
 	///////
     var HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='validaEdad()' value='Continuar'/>";
     pintarHTML('divBoton', HTMLboton);
@@ -1273,79 +1283,10 @@ function hideUnnecessaryElements() {
     });
 }
 
-
-//let questions = [
-//    'Question 1',
-//    'Question 2',
-//    'Question 3',
-//    'Question 4'
-//];
-//let questionIndex = 0;
-//let shouldShowOptionalQuestion = false; // Set this to true based on the participants' performance
-
-//function showQuestion() {
-//	console.log("We are now showing question!")
-//	hideUnnecessaryElements();
-//    if (questionIndex < questions.length) {
-//        let question = questions[questionIndex];
-//        let questionHTML = `
-//            <p>${question}</p>
-//            <textarea id="question${questionIndex}" name="question${questionIndex}" rows="6" cols="50"></textarea>
-//        `;
-//        pintarHTML('divCuestionariosEdad', questionHTML);
-//
-//        let HTMLboton = "<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='nextQuestion()' value='Continuar'/>";
-//        pintarHTML('divBoton', HTMLboton);
-//    } else {
-        // Handle the end of the questionnaire
-//        if (shouldShowOptionalQuestion) {
-            // Display the optional question
-            // After the optional question, you may want to call a function to process the responses
-//        } else {
-            // Proceed without the optional question, and call a function to process the responses
-//        }
-//    }
-//}
-
-//function nextQuestion() {
-    // Here, you can add code to validate the response and store it
-
-    // Increment the question index and show the next question
-//    questionIndex++;
-//    showQuestion();
-//}
-
-
-
 function saveData(){
 	console.log("We are now saving data!")
     //showQuestion()
 	var participantId = personId;
-
-    // Loop through all the questions
-    for (let i = arrayInstruc.length - 7; i < arrayInstruc.length - 2; i++) {
-        console.log("Looping!")
-		var answerElementId = `questionText${i}`;
-        var answerElement = document.getElementById(answerElementId);
-
-        // If the answer element exists (it won't exist for the fifth question if it wasn't shown)
-        if (answerElement) {
-			console.log("Answer element exists!")
-            // Get the answer from the text area")
-            var answer = answerElement.value;
-            var processedAnswer = processText(answer); // process the text (you need to define this function)
-
-            // Save to Firebase
-            var dataToSave = `${participantId}; ${processedAnswer}`;
-            if (testeo == 0){
-				guardaFirebase(dataToSave, 'myAnswers');
-			}
-			else{
-				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-			}   
-			
-        }
-    }
 
     stringDate();
     
