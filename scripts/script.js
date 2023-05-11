@@ -876,7 +876,7 @@ function siguienteTexto(){
                 console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
             }        
         }
-        if (stateTexto > arrayInstruc.length -  && stateTexto <= arrayInstruc.length - 3) {
+        if (stateTexto > arrayInstruc.length - 7 && stateTexto <= arrayInstruc.length - 3) {
             htmlContenido += `<br><textarea id="questionText${stateTexto - 1}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto - 1})"></textarea>`;
         }
     }
