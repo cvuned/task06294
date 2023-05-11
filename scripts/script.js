@@ -861,7 +861,7 @@ function siguienteTexto(){
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
 			console.log("Estoy guardando la respuesta");
-            var participantId = "YourParticipantID"; // replace with the actual participant ID
+            var participantId = personId;
             var answer = answerElement.value;
             var processedAnswer = processText(answer); // process the text (you need to define this function)
 
@@ -873,7 +873,6 @@ function siguienteTexto(){
 			}
 			else{
 				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-			
 			}        
 		}
 		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
@@ -892,6 +891,24 @@ function siguienteTexto(){
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
 
+	if (stateTexto == arrayInstruc.length - 2) {
+		console.log("Estoy guardando la respuesta de la PREGUNTA 5!");
+		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
+		var answerElement = document.getElementById(answerElementId);
+	
+		if (answerElement) {
+			var participantId = personId;
+			var answer = answerElement.value;
+			var processedAnswer = processText(answer); // process the text (you need to define this function)
+	
+			if (testeo == 0){
+				guardaFirebase(dataToSave, 'myAnswers');
+			}
+			else{
+				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
+			}
+		}
+	}
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
