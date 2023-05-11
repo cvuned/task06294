@@ -851,6 +851,7 @@ function siguienteTexto(){
     if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
         var answerElementId = `questionText${stateTexto}`;
         var answerElement = document.getElementById(answerElementId);
+		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
@@ -871,8 +872,7 @@ function siguienteTexto(){
 
         }
 
-        htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
-    }
+            }
 
     if (stateTexto == arrayInstruc.length - 3) {
 		if (shouldShowFifthQuestion()) {
