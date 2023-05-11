@@ -834,11 +834,32 @@ function ReseteoJuicios(){
 
 function shouldShowFifthQuestion() {
     // Replace this with the actual condition
-    if ((FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) > 0.94 || (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) < 0.5) {
+    if ((FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) > 0.94 || (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) < 0.05) {
         return 1;
     }
     return 0;
 }
+
+function numberOfQuestions() {
+    // Replace this with the actual condition
+    return 4 + shouldShowFifthQuestion();
+}
+
+function siempreOnunca() { 
+	if (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials == 1) {
+        return "siempre";
+    }
+	if (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials == 0) {
+        return "nunca";
+    }
+	if (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials > 0.94) {
+        return "prácticamente siempre";
+    }
+	if (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials < 0.05) {
+        return "prácticamente nunca";
+    }
+}
+
 
 function saveAnswer(){
 	// Esta función envía las respuestas de las preguntas. 
@@ -980,7 +1001,7 @@ function prepararTextos(){
 		//console.log("Preparando textos para grupo de CONTROL");	 	//debug
 		arrayInstruc=[
 			//0: (portada) 
-			"<h2 class=\"titulo\">ESTUDIO CVTD22XX2</h2><p>¡Muchas gracias por participar en esta investigación, no seria posible sin ti!</p><br><br><img style=\"display"
+			"<h2 class=\"titulo\">ESTUDIO CVTD23XX2</h2><p>¡Muchas gracias por participar en esta investigación, no seria posible sin ti!</p><br><br><img style=\"display"
 			+ ": block; margin-left: auto; margin-right: auto;\" src=\"img/uned.png\" width=\"200px\"><p>Sigue las instrucciones que encontrarás a continuación.</p>",
 		
 			//2: Instrucciones 1 
@@ -1008,11 +1029,12 @@ function prepararTextos(){
 			+ "Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". "
 			+ "Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 
-			"<p><h3 class=\"titulo\">Pregunta 1 / "+4 + shouldShowFifthQuestion() +" </h3><p> Please describe your experience during the task.",
-		    "<p><h3 class=\"titulo\">Pregunta 2 / "+4 + shouldShowFifthQuestion() +" </h3><p> How did you decide which patients to give Batatrim?",
-		    "<p><h3 class=\"titulo\">Pregunta 3 / "+4 + shouldShowFifthQuestion() +" </h3><p> What strategies did you use to make your decisions?",
- 	   		"<p><h3 class=\"titulo\">Pregunta 4 / "+4 + shouldShowFifthQuestion() +" </h3><p> Were there any difficulties you faced during the task?",
-			"<p><h3 class=\"titulo\">Pregunta 5 / "+4 + shouldShowFifthQuestion() +" </h3><p> This is your conditional question.",
+			"<p><h3 class=\"titulo\">Pregunta 1 / "+numberOfQuestions()+" </h3><p> ¿Podrías explicar con tus palabras cuál era el objetivo que tenías que cumplir en la tarea de este estudio? ¿Qué entendiste que debías hacer?",
+		    "<p><h3 class=\"titulo\">Pregunta 2 / "+numberOfQuestions()+" </h3><p> ¿Cómo tomaste la decisión de dar o no el medicamento a cada paciente?",
+		    "<p><h3 class=\"titulo\">Pregunta 3 / "+numberOfQuestions()+" </h3><p> En la pregunta final sobre la efectividad de la medicina, en la escala de 0 a 100, indicaste "+FaseTest.Juicio+".</p>" 
+			+ "¿Cómo llegaste a esta conclusión sobre la efectividad del medicamento al final del experimento? ¿Hubo algún aspecto en particular que influyera en tu decisión?",
+ 	   		"<p><h3 class=\"titulo\">Pregunta 4 / "+numberOfQuestions()+" </h3><p> ¿Podrías explicar con tus palabras cuál es la efectividad de la medicina? ¿Qué significa ese número para ti?",
+			"<p><h3 class=\"titulo\">Pregunta 5 / "+numberOfQuestions()+" </h3><p> ¿Qué te llevó a tomar la decisión de dar "+siempreOnunca()+" la medicina a los pacientes del experimento?",
 							
 			// A guardar datos! 
 			//13: Save Data... 
