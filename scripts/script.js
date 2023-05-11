@@ -892,7 +892,6 @@ function siguienteTexto(){
     }
 
 	if (stateTexto == arrayInstruc.length - 2) {
-		console.log("Estoy guardando la respuesta de la PREGUNTA 5!");
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
 	
@@ -900,31 +899,15 @@ function siguienteTexto(){
 			var participantId = personId;
 			var answer = answerElement.value;
 			var processedAnswer = processText(answer); // process the text (you need to define this function)
+			var dataToSave = `${participantId}; ${processedAnswer}`;
 	
 			if (testeo == 0){
 				guardaFirebase(dataToSave, 'myAnswers');
-			}
-			else{
+			} else {
 				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
 			}
 		}
-		var answerElementId = `questionText${stateTexto - 2}`; // Get the previous question's answer
-		var answerElement = document.getElementById(answerElementId);
-	
-		if (answerElement) {
-			console.log("Estoy guardando la respuesta de la PREGUNTA 5, pero probando -2!");
-			var participantId = personId;
-			var answer = answerElement.value;
-			var processedAnswer = processText(answer); // process the text (you need to define this function)
-	
-			if (testeo == 0){
-				guardaFirebase(dataToSave, 'myAnswers');
-			}
-			else{
-				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-			}
-		}
-	}
+		
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
