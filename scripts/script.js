@@ -891,8 +891,8 @@ function siguienteTexto(){
 			console.log("No se va a mostrar la pregunta 5");
 			stateTexto++;
 		}
-        htmlContenido = "Your fifth question text:<br>";
-        htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
+		htmlContenido=arrayInstruc[stateTexto];
+		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
     }
 	
 	
