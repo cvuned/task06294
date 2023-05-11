@@ -832,6 +832,10 @@ function shouldShowFifthQuestion() {
     return false;
 }
 
+function saveAnswer(){
+	// Esta función envía las respuestas de las preguntas. 
+	return true
+}
 
 function siguienteTexto(){
 	
