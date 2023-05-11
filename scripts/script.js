@@ -879,26 +879,12 @@ function siguienteTexto(){
 	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 	}
-//    if (stateTexto == arrayInstruc.length - 3) {
-		
-//		if (shouldShowFifthQuestion()) {
-        // Show the 5th question
-//			console.log("Mostrando la pregunta 5");
-//			console.log(stateTexto + " ## Se va a guardard como id=" + "questionText$" + stateTexto);
-//			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
-//		}
-//		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
-//			stateTexto++;
-//		}
-
-//    if (stateTexto == arrayInstruc.length - 3) {
+    if (stateTexto == arrayInstruc.length - 3) {
 		
 		if (!shouldShowFifthQuestion()) {
-			stateTexto++;
+        	stateTexto++;
 		}
-
-
-		htmlContenido = "Your fifth question text:<br>";
+        htmlContenido = "Your fifth question text:<br>";
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
 	
