@@ -6,6 +6,7 @@
 
 //var personId = Math.floor((Math.random() * 1000000) + 1);
 var personId = processText(stringDate());
+var participantIP = "";
 var group =99; 
 //var Balanceo = Math.floor(Math.random()*2 + 1);
 var state=99;           //controla el ensayo dentro de cada fase
@@ -143,7 +144,7 @@ function arranca(){
 		}
 	  }
 	  
-	getUserIP();
+	participantIP = getUserIP();
 
 	
 	function gotData(data) { 
@@ -1191,7 +1192,7 @@ function cuestionarioEdad(){
     
 	/////// Aquí vamos a aprovechar para enviar a Firebase los datos de nuestro participante
 	// Esta línea nos guarda el intento: 
-	startData = "A participant has started with ID " + personId +" with IP:"+ userIP;
+	startData = "A participant has started with ID " + personId +" with IP:"+ participantIP;
 	if (testeo == 0){ 
 		guardaFirebase(startData, 'mySurvivalLogs');
 	}
@@ -1308,7 +1309,7 @@ function saveData(){
 			"ExpCVTD22XX2" + "," + 
 			groupNames[grupoAsignado] + "," + 
 			personId + "," +                		//ID aleatorio
-			//PartIP + "," +						// IP del participante //Modified for testing TFK
+			participantIP + "," +						// IP del participante //Modified for testing TFK
 			Age + "," +         		
 			Gender + "," +		
 			FaseTest.Juicio + "," + 				//Juicio 
@@ -1327,7 +1328,7 @@ function saveData(){
 			"ExpCVTD22XX2" + "," + 
 			groupNames[grupoAsignado] + "," + 
 			personId + "," +                		//ID aleatorio
-			userIP + "," +							// IP del participante //Modified for testing TFK
+			participantIP + "," +							// IP del participante //Modified for testing TFK
 			Age + "," +         		
 			Gender + "," +		
 			FaseTest.Juicio + "," + 				//Juicio 
