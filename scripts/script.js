@@ -844,24 +844,23 @@ function processText(text) {
 }
 
 function siguienteTexto(){
-    stateTexto++; // Moved to the beginning
-
-    mostrar(divTextos);
-    mostrar(divBoton);
+	
+	mostrar(divTextos);
+	mostrar(divBoton);
     ocultar(divContingencia);
     ocultar(divJuicio);
     ocultar(divCuestionariosEdad);
-    
-    htmlContenido=arrayInstruc[stateTexto - 1]; // Adjusted due to stateTexto++
+	
+    htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
-    
-    if (stateTexto > arrayInstruc.length - 7) {
-        var answerElementId = `questionText${stateTexto - 2}`; // Get the previous question's answer
-        var answerElement = document.getElementById(answerElementId);
+	
+    if (stateTexto >= arrayInstruc.length - 7) {
+		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
+    	var answerElement = document.getElementById(answerElementId);
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
-            console.log("Estoy guardando la respuesta");
+			console.log("Estoy guardando la respuesta");
             var participantId = personId;
             var answer = answerElement.value;
             var processedAnswer = processText(answer); // process the text (you need to define this function)
@@ -869,37 +868,40 @@ function siguienteTexto(){
             // Save to Firebase
             var dataToSave = `${participantId}; ${processedAnswer}`;
         
-            if (testeo == 0){
-                guardaFirebase(dataToSave, 'myAnswers');
-            }
-            else{
-                console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-            }        
-        }
-        if (stateTexto > arrayInstruc.length - 7 && stateTexto <= arrayInstruc.length - 3) {
-            htmlContenido += `<br><textarea id="questionText${stateTexto - 1}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto - 1})"></textarea>`;
-        }
-    }
+			if (testeo == 0){
+				guardaFirebase(dataToSave, 'myAnswers');
+			}
+			else{
+				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
+			}        
+		}
+		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
+	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+		}
+	}
     if (stateTexto == arrayInstruc.length - 3) {
-        
-        if (shouldShowFifthQuestion()) {
-            // Show the 5th question
-            htmlContenido += `<br><textarea id="questionText${stateTexto - 1}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto - 1})"></textarea>`;
-        }
-        else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
-            stateTexto++;
-        }
+		
+		if (shouldShowFifthQuestion()) {
+        // Show the 5th question
+			console.log("Mostrando la pregunta 5");
+			console.log(stateTexto + " ## Se va a guardard como id=" + "questionText$" + stateTexto");
+			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+		}
+		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
+			stateTexto++;
+		}
         htmlContenido = "Your fifth question text:<br>";
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
-    
-    htmlBotones=arrayBoton[stateTexto - 1]; // Adjusted due to stateTexto++
-    
-    pintarHTML("divTextos",htmlContenido);
+	
+	
+	htmlBotones=arrayBoton[stateTexto];
+	
+	pintarHTML("divTextos",htmlContenido);
     pintarHTML("divBoton",htmlBotones);
-    //console.log("Estado de texto actual = " + stateTexto)        //debug
+	//console.log("Estado de texto actual = " + stateTexto)		//debug
+    stateTexto++;	
 }
-
 
 function previoTexto(){
 	stateTexto=stateTexto-2;
@@ -996,7 +998,7 @@ function prepararTextos(){
 		    "<p><h3 class=\"titulo\">Pregunta 2 / 4 </h3><p> How did you decide which patients to give Batatrim?",
 		    "<p><h3 class=\"titulo\">Pregunta 3 / 4 </h3><p> What strategies did you use to make your decisions?",
  	   		"<p><h3 class=\"titulo\">Pregunta 4 / 4 </h3><p> Were there any difficulties you faced during the task?",
-			"Question 5: This is your conditional question.",
+			"<p><h3 class=\"titulo\">Pregunta 5 / 5 </h3><p> This is your conditional question.",
 							
 			// A guardar datos! 
 			//13: Save Data... 
