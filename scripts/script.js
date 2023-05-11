@@ -892,35 +892,6 @@ function siguienteTexto(){
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
 	
-	if (stateTexto == arrayInstruc.length - 2) {
-		console.log("Estoy guardando la respuesta de la pregunta 5?");
-		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
-		var answerElement = document.getElementById(answerElementId);
-		console.log("1: -");
-		//answer1 = document.getElementById(`questionText${stateTexto}`);
-		//console.log(answer1.value);
-		console.log("2: -1 ");
-		answer2 = document.getElementById(`questionText${stateTexto - 1}`);
-		console.log(answer2.value);
-		answer3 = document.getElementById(`questionText${stateTexto - 2}`);
-		console.log(answer3.value);
-
-		if (answerElement) {
-			var participantId = personId;
-			var answer = answerElement.value;
-			var processedAnswer = processText(answer); // process the text (you need to define this function)
-			var dataToSave = `${participantId}; ${processedAnswer}`;
-	
-			if (testeo == 0){
-				guardaFirebase(dataToSave, 'myAnswers');
-			} else {
-				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-			}
-		}
-		// No need to get the answer for the question two steps back, you have already saved it
-	}
-	
-
 	
 	htmlBotones=arrayBoton[stateTexto];
 	
@@ -1346,6 +1317,29 @@ function hideUnnecessaryElements() {
 function saveData(){
 	console.log("We are now saving data!")
     //showQuestion()
+	var participantId = personId;
+
+    // Loop through all the questions
+    for (let i = arrayInstruc.length - 7; i < arrayInstruc.length - 2; i++) {
+        var answerElementId = `questionText${i}`;
+        var answerElement = document.getElementById(answerElementId);
+
+        // If the answer element exists (it won't exist for the fifth question if it wasn't shown)
+        if (answerElement) {
+            var answer = answerElement.value;
+            var processedAnswer = processText(answer); // process the text (you need to define this function)
+
+            // Save to Firebase
+            var dataToSave = `${participantId}; ${processedAnswer}`;
+            if (testeo == 0){
+				guardaFirebase(dataToSave, 'myAnswers');
+			}
+			else{
+				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
+			}   
+			
+        }
+    }
 
     stringDate();
     
