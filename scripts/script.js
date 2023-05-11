@@ -851,11 +851,11 @@ function siguienteTexto(){
     if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
         var answerElementId = `questionText${stateTexto}`;
         var answerElement = document.getElementById(answerElementId);
-		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
-			console.log("Entramos en el bucle de guardar!")
+			console.log("Entramos en el bucle de guardar! stateTexto = " + stateTexto)
+            // Save the answer")
             var participantId = personId; // replace with the actual participant ID
             var answer = answerElement.value;
 			console.log(answer)
@@ -869,10 +869,9 @@ function siguienteTexto(){
 			else{ 
 				console.log(dataToSave);
 			}
-
-        }
-
-            }
+		}
+        htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+    }
 
     if (stateTexto == arrayInstruc.length - 3) {
 		if (shouldShowFifthQuestion()) {
@@ -885,14 +884,13 @@ function siguienteTexto(){
         htmlContenido = "Your fifth question text:<br>";
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
-
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
     pintarHTML("divBoton",htmlBotones);
-	//console.log("Estado de texto actual = " + stateTexto)		//debug
+	document.getElementById("contenido").innerHTML = htmlContenido;
+    document.getElementById("botonTexto").innerHTML = botonTexto;
     stateTexto++;	
-
 }
 
 function previoTexto(){
