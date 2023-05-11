@@ -1321,11 +1321,14 @@ function saveData(){
 
     // Loop through all the questions
     for (let i = arrayInstruc.length - 7; i < arrayInstruc.length - 2; i++) {
-        var answerElementId = `questionText${i}`;
+        console.log("Looping!")
+		var answerElementId = `questionText${i}`;
         var answerElement = document.getElementById(answerElementId);
 
         // If the answer element exists (it won't exist for the fifth question if it wasn't shown)
         if (answerElement) {
+			console.log("Answer element exists!")
+            // Get the answer from the text area")
             var answer = answerElement.value;
             var processedAnswer = processText(answer); // process the text (you need to define this function)
 
