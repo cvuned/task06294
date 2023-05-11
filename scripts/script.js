@@ -824,6 +824,14 @@ function ReseteoJuicios(){
 //++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++
 
+function shouldShowFifthQuestion() {
+    // Replace this with the actual condition
+    if (if ((FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / numTrials) > 0.94 || (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / numTrials) < 0.5) {) {
+        return true;
+    }
+    return false;
+}
+
 
 function siguienteTexto(){
 	
@@ -836,10 +844,21 @@ function siguienteTexto(){
     htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
 	
-	if (stateTexto >= arrayInstruc.length - 6 && stateTexto < arrayInstruc.length - 2) {
-		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;"></textarea>`;
-	}
+    if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
+        htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+    }
 
+    if (stateTexto == arrayInstruc.length - 3) {
+		if (shouldShowFifthQuestion()) {
+        // Show the 5th question
+			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+		}
+		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
+			stateTexto++;
+		}
+        htmlContenido = "Your fifth question text:<br>";
+        htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
+    }
 
 	htmlBotones=arrayBoton[stateTexto];
 	
@@ -941,10 +960,11 @@ function prepararTextos(){
 			+ "Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". "
 			+ "Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 
-			"Question 1: Please describe your experience during the task.",
-		    "Question 2: How did you decide which patients to give Batatrim?",
-		    "Question 3: What strategies did you use to make your decisions?",
- 	   		"Question 4: Were there any difficulties you faced during the task?",
+			"<p><h3 class=\"titulo\">Pregunta 1 / 4 </h3><p> Please describe your experience during the task.",
+		    "<p><h3 class=\"titulo\">Pregunta 2 / 4 </h3><p> How did you decide which patients to give Batatrim?",
+		    "<p><h3 class=\"titulo\">Pregunta 3 / 4 </h3><p> What strategies did you use to make your decisions?",
+ 	   		"<p><h3 class=\"titulo\">Pregunta 4 / 4 </h3><p> Were there any difficulties you faced during the task?",
+			"Question 5: This is your conditional question.",
 							
 			// A guardar datos! 
 			//13: Save Data... 
@@ -1036,10 +1056,11 @@ function prepararTextos(){
 			//12:
 			//"<input type='button' class = \"botonFlow\" style=\"font-size:100%\" onclick='siguienteTexto()' value='Continuar'/>",
 			
-			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
-		    "<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
-    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Next'/>",
-    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='saveData()' value='Submit'/>",
+			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
+		    "<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
+    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
+    		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
+			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
 
 
 
