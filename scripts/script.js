@@ -880,6 +880,7 @@ function siguienteTexto(){
 		}
 	}
     if (stateTexto == arrayInstruc.length - 3) {
+		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
@@ -891,7 +892,8 @@ function siguienteTexto(){
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
 	
-	if (stateTexto == arrayInstruc.length - 2) {
+	if (stateTexto == arrayInstruc.length - 3) {
+		console.log("Estoy guardando la respuesta de la pregunta 5?");
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
 	
