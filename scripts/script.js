@@ -1191,7 +1191,7 @@ function cuestionarioEdad(){
     
 	/////// Aquí vamos a aprovechar para enviar a Firebase los datos de nuestro participante
 	// Esta línea nos guarda el intento: 
-	startData = "A participant has started with ID " + personId +","+ stringDate();
+	startData = "A participant has started with ID " + personId +" with IP:"+ userIP;
 	if (testeo == 0){ 
 		guardaFirebase(startData, 'mySurvivalLogs');
 	}
@@ -1327,7 +1327,7 @@ function saveData(){
 			"ExpCVTD22XX2" + "," + 
 			groupNames[grupoAsignado] + "," + 
 			personId + "," +                		//ID aleatorio
-			//PartIP + "," +						// IP del participante //Modified for testing TFK
+			userIP + "," +							// IP del participante //Modified for testing TFK
 			Age + "," +         		
 			Gender + "," +		
 			FaseTest.Juicio + "," + 				//Juicio 
