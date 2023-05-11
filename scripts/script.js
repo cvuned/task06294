@@ -854,22 +854,15 @@ function siguienteTexto(){
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
-			console.log("Entramos en el bucle de guardar! stateTexto = " + stateTexto)
-            // Save the answer")
-            var participantId = personId; // replace with the actual participant ID
+            var participantId = "YourParticipantID"; // replace with the actual participant ID
             var answer = answerElement.value;
-			console.log(answer)
             var processedAnswer = processText(answer); // process the text (you need to define this function)
 
             // Save to Firebase
             var dataToSave = `${participantId}; ${processedAnswer}`;
-            if (testeo === 0){  
-				guardaFirebase(dataToSave, 'myQuestions');
-			}
-			else{ 
-				console.log(dataToSave);
-			}
-		}
+            guardaFirebase(dataToSave, 'myAnswers');
+        }
+
         htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
     }
 
@@ -884,12 +877,12 @@ function siguienteTexto(){
         htmlContenido = "Your fifth question text:<br>";
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
+
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
     pintarHTML("divBoton",htmlBotones);
-	document.getElementById("contenido").innerHTML = htmlContenido;
-    document.getElementById("botonTexto").innerHTML = botonTexto;
+	//console.log("Estado de texto actual = " + stateTexto)		//debug
     stateTexto++;	
 }
 
