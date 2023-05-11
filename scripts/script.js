@@ -137,6 +137,7 @@ function arranca(){
 		  const response = await fetch('https://api.ipify.org?format=json');
 		  const data = await response.json();
 		  const userIP = data.ip;
+		  participantIP = userIP;  
 		  console.log('User IP:', userIP);
 		  return userIP;
 		} catch (error) {
@@ -144,7 +145,7 @@ function arranca(){
 		}
 	  }
 	  
-	participantIP = getUserIP();
+	getUserIP();
 
 	
 	function gotData(data) { 
@@ -1007,11 +1008,11 @@ function prepararTextos(){
 			+ "Intenta averiguar hasta qué punto es efectivo el "+FaseTest.nombreClave+ ". "
 			+ "Cuando hayas tratado a un buen número de pacientes te haremos algunas preguntas.</p>",
 
-			"<p><h3 class=\"titulo\">Pregunta 1 / 4 </h3><p> Please describe your experience during the task.",
-		    "<p><h3 class=\"titulo\">Pregunta 2 / 4 </h3><p> How did you decide which patients to give Batatrim?",
-		    "<p><h3 class=\"titulo\">Pregunta 3 / 4 </h3><p> What strategies did you use to make your decisions?",
- 	   		"<p><h3 class=\"titulo\">Pregunta 4 / 4 </h3><p> Were there any difficulties you faced during the task?",
-			"<p><h3 class=\"titulo\">Pregunta 5 / 5 </h3><p> This is your conditional question.",
+			"<p><h3 class=\"titulo\">Pregunta 1 / "+4 + shouldShowFifthQuestion() +" </h3><p> Please describe your experience during the task.",
+		    "<p><h3 class=\"titulo\">Pregunta 2 / "+4 + shouldShowFifthQuestion() +" </h3><p> How did you decide which patients to give Batatrim?",
+		    "<p><h3 class=\"titulo\">Pregunta 3 / "+4 + shouldShowFifthQuestion() +" </h3><p> What strategies did you use to make your decisions?",
+ 	   		"<p><h3 class=\"titulo\">Pregunta 4 / "+4 + shouldShowFifthQuestion() +" </h3><p> Were there any difficulties you faced during the task?",
+			"<p><h3 class=\"titulo\">Pregunta 5 / "+4 + shouldShowFifthQuestion() +" </h3><p> This is your conditional question.",
 							
 			// A guardar datos! 
 			//13: Save Data... 
