@@ -4,7 +4,7 @@
 //++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++
 
-var personId = Math.floor((Math.random() * 1000000) + 1);
+//var personId = Math.floor((Math.random() * 1000000) + 1);
 var personId = processText(stringDate());
 var group =99; 
 //var Balanceo = Math.floor(Math.random()*2 + 1);
