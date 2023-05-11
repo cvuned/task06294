@@ -854,7 +854,7 @@ function siguienteTexto(){
     htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
 	
-    if (stateTexto >= arrayInstruc.length - 7) {
+    if (stateTexto >= arrayInstruc.length - 8) {
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
     	var answerElement = document.getElementById(answerElementId);
 
@@ -875,11 +875,11 @@ function siguienteTexto(){
 				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
 			}        
 		}
-		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
+		if (stateTexto >= arrayInstruc.length - 8 && stateTexto < arrayInstruc.length - 4) {
 	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 	}
-    if (stateTexto == arrayInstruc.length - 3) {
+    if (stateTexto == arrayInstruc.length - 4) {
 		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
@@ -997,6 +997,7 @@ function prepararTextos(){
 		    "<p><h3 class=\"titulo\">Pregunta 3 / 4 </h3><p> What strategies did you use to make your decisions?",
  	   		"<p><h3 class=\"titulo\">Pregunta 4 / 4 </h3><p> Were there any difficulties you faced during the task?",
 			"Question 5: This is your conditional question.",
+			"Gracias! Esas eran todas las preguntas.",
 							
 			// A guardar datos! 
 			//13: Save Data... 
@@ -1092,6 +1093,7 @@ function prepararTextos(){
 		    "<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
     		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
     		"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
+			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
 			"<input type='button' class='botonFlow' style='font-size:100%' onclick='siguienteTexto()' value='Siguiente'/>",
 
 
