@@ -890,7 +890,7 @@ function siguienteTexto(){
         htmlContenido = "Your fifth question text:<br>";
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
-
+	
 	if (stateTexto == arrayInstruc.length - 2) {
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
@@ -907,7 +907,11 @@ function siguienteTexto(){
 				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
 			}
 		}
-		
+		// No need to get the answer for the question two steps back, you have already saved it
+	}
+	
+
+	
 	htmlBotones=arrayBoton[stateTexto];
 	
 	pintarHTML("divTextos",htmlContenido);
