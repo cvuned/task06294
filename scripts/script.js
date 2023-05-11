@@ -837,6 +837,11 @@ function saveAnswer(){
 	return true
 }
 
+function processText(text) {
+    // Define how you want to process the text here
+    // The following is just an example of replacing newline characters with spaces
+    return text.replace(/\n/g, ' ');
+
 function siguienteTexto(){
 	
 	mostrar(divTextos);
