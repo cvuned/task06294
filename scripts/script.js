@@ -897,11 +897,13 @@ function siguienteTexto(){
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
 		console.log("1: -");
-		console.log(document.getElementById(`questionText${stateTexto}`).value);
+		answer1 = document.getElementById(`questionText${stateTexto}`);
+		console.log(answer1.value);
 		console.log("2: -1 ");
-		console.log(document.getElementById(`questionText${stateTexto - 1}`).value);
-		console.log("3: -2 ");
-		console.log(document.getElementById(`questionText${stateTexto - 2}`).value);
+		answer2 = document.getElementById(`questionText${stateTexto - 1}`);
+		console.log(answer2.value);
+		answer3 = document.getElementById(`questionText${stateTexto - 2}`);
+		console.log(answer3.value);
 
 		if (answerElement) {
 			var participantId = personId;
