@@ -853,38 +853,34 @@ function siguienteTexto(){
 	
     htmlContenido=arrayInstruc[stateTexto];
     // Check if the current state is one of the custom questions
-
 	
-
-	// If this isn't the first time this function is called (answerElement will be null on the first call)
-	if (answerElement) {
-		console.log("Estoy guardando la respuesta");
-		var participantId = "YourParticipantID"; // replace with the actual participant ID
-		var answer = answerElement.value;
-		var processedAnswer = processText(answer); // process the text (you need to define this function)
-
-		// Save to Firebase
-		var dataToSave = `${participantId}; ${processedAnswer}`;
-	
-		if (testeo == 0){
-			guardaFirebase(dataToSave, 'myAnswers');
+    if (stateTexto >= arrayInstruc.length - 7) {
+		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
+	        var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
+    	    var answerElement = document.getElementById(answerElementId);
 		}
-		else{
-			console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
-		
-		}        
-	}
+        // If this isn't the first time this function is called (answerElement will be null on the first call)
+        if (answerElement) {
+			console.log("Estoy guardando la respuesta");
+            var participantId = "YourParticipantID"; // replace with the actual participant ID
+            var answer = answerElement.value;
+            var processedAnswer = processText(answer); // process the text (you need to define this function)
 
-
-    if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
-        var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
-        var answerElement = document.getElementById(answerElementId);
-
+            // Save to Firebase
+            var dataToSave = `${participantId}; ${processedAnswer}`;
         
-
-        htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
-    }
-
+			if (testeo == 0){
+				guardaFirebase(dataToSave, 'myAnswers');
+			}
+			else{
+				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
+			
+			}        
+		}
+		if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
+	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+		}
+	}
     if (stateTexto == arrayInstruc.length - 3) {
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
