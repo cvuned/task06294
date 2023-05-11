@@ -912,7 +912,7 @@ function siguienteTexto(){
 		var answerElement = document.getElementById(answerElementId);
 	
 		if (answerElement) {
-			consolo.log("Estoy guardando la respuesta de la PREGUNTA 5, pero probando -2!");
+			console.log("Estoy guardando la respuesta de la PREGUNTA 5, pero probando -2!");
 			var participantId = personId;
 			var answer = answerElement.value;
 			var processedAnswer = processText(answer); // process the text (you need to define this function)
