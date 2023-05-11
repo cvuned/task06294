@@ -5,6 +5,7 @@
 //++++++++++++++++++++++++++++++++++++++
 
 var personId = Math.floor((Math.random() * 1000000) + 1);
+var personId = processText(stringDate());
 var group =99; 
 //var Balanceo = Math.floor(Math.random()*2 + 1);
 var state=99;           //controla el ensayo dentro de cada fase
@@ -613,7 +614,7 @@ function ITI(){
         setTimeout("showCue()", 100);
 		
 		// Aquí vamos a ir haciendo capturas
-		if(state % FaseTest.numTrials == 0){
+		if((state+1) % FaseTest.numTrials == 0){
 			startData = "A participant with ID " + personId +","+ "reached state:"+ ","+ state +","+ stringDate();
 			if (testeo == 0){
 				guardaFirebase(startData, 'mySurvivalLogs');				
@@ -843,10 +844,15 @@ function saveAnswer(){
 }
 
 function processText(text) {
-    // Define how you want to process the text here
-    // The following is just an example of replacing newline characters with spaces
-    return text.replace(/\n/g, ' ');
+    // Replace newline characters with spaces
+    text = text.replace(/\n/g, ' ');
+
+    // Remove backslashes, forward slashes, curly braces, and dollar signs
+    text = text.replace(/[\\\/{}$]/g, '');
+
+    return text;
 }
+
 
 function siguienteTexto(){
 	
