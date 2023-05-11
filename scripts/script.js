@@ -892,11 +892,17 @@ function siguienteTexto(){
         htmlContenido += `<br><textarea id="questionText5" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(5)"></textarea>`;
     }
 	
-	if (stateTexto == arrayInstruc.length - 3) {
+	if (stateTexto == arrayInstruc.length - 2) {
 		console.log("Estoy guardando la respuesta de la pregunta 5?");
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
-	
+		console.log("1: -");
+		console.log(document.getElementById(`questionText${stateTexto}`).value);
+		console.log("2: -1 ");
+		console.log(document.getElementById(`questionText${stateTexto - 1}`).value);
+		console.log("3: -2 ");
+		console.log(document.getElementById(`questionText${stateTexto - 2}`).value);
+
 		if (answerElement) {
 			var participantId = personId;
 			var answer = answerElement.value;
