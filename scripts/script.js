@@ -834,9 +834,9 @@ function ReseteoJuicios(){
 function shouldShowFifthQuestion() {
     // Replace this with the actual condition
     if ((FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) > 0.94 || (FaseTest.secuenciaResps.reduce((a, b) => a + b, 0) / FaseTest.numTrials) < 0.5) {
-        return true;
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 function saveAnswer(){
