@@ -854,8 +854,10 @@ function siguienteTexto(){
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
+			console.log("Entramos en el bucle de guardar!")
             var participantId = personId; // replace with the actual participant ID
             var answer = answerElement.value;
+			console.log(answer)
             var processedAnswer = processText(answer); // process the text (you need to define this function)
 
             // Save to Firebase
