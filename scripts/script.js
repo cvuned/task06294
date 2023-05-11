@@ -897,8 +897,8 @@ function siguienteTexto(){
 		var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
 		var answerElement = document.getElementById(answerElementId);
 		console.log("1: -");
-		answer1 = document.getElementById(`questionText${stateTexto}`);
-		console.log(answer1.value);
+		//answer1 = document.getElementById(`questionText${stateTexto}`);
+		//console.log(answer1.value);
 		console.log("2: -1 ");
 		answer2 = document.getElementById(`questionText${stateTexto - 1}`);
 		console.log(answer2.value);
