@@ -138,10 +138,10 @@ function arranca(){
 		  const data = await response.json();
 		  const userIP = data.ip;
 		  participantIP = userIP;  
-		  console.log('User IP:', userIP);
+		  //console.log('User IP:', userIP); //debug
 		  return userIP;
 		} catch (error) {
-		  console.error('Error fetching IP:', error);
+		  //console.error('Error fetching IP:', error); //debug
 		}
 	  }
 	  
@@ -894,7 +894,7 @@ function siguienteTexto(){
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
-			console.log("Estoy guardando la respuesta");
+			//console.log("Estoy guardando la respuesta"); // debug
             var participantId = personId;
             var answer = answerElement.value;
             var processedAnswer = processText(answer); // process the text (you need to define this function)
@@ -917,8 +917,6 @@ function siguienteTexto(){
 		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
-			console.log("Mostrando la pregunta 5");
-			console.log(stateTexto + " ## Se va a guardard como id=" + "questionText$" + stateTexto);
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
@@ -1314,7 +1312,7 @@ function hideUnnecessaryElements() {
 }
 
 function saveData(){
-	console.log("We are now saving data!")
+	//console.log("We are now saving data!") // debug
     //showQuestion()
 	var participantId = personId;
 
