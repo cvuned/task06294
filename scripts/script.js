@@ -855,19 +855,27 @@ function siguienteTexto(){
     // Check if the current state is one of the custom questions
 	
     if (stateTexto >= arrayInstruc.length - 7 && stateTexto < arrayInstruc.length - 3) {
-        var answerElementId = `questionText${stateTexto}`;
+        var answerElementId = `questionText${stateTexto - 1}`; // Get the previous question's answer
         var answerElement = document.getElementById(answerElementId);
 
         // If this isn't the first time this function is called (answerElement will be null on the first call)
         if (answerElement) {
+			console.log("Estoy guardando la respuesta");
             var participantId = "YourParticipantID"; // replace with the actual participant ID
             var answer = answerElement.value;
             var processedAnswer = processText(answer); // process the text (you need to define this function)
 
             // Save to Firebase
             var dataToSave = `${participantId}; ${processedAnswer}`;
-            guardaFirebase(dataToSave, 'myAnswers');
-        }
+        
+			if (testeo == 0){
+				guardaFirebase(dataToSave, 'myAnswers');
+			}
+			else{
+				console.log("Estoy guardando la respuesta en testeo - " + dataToSave);
+			
+			}        
+		}
 
         htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
     }
