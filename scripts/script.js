@@ -19,8 +19,8 @@ var fecha="";           //contendrá la fecha/hora.
 var Cuestionario=[];    //contiene las respuestas al cuestionario de generalizacion
 var t0 = 0; 
 var t1 = 0; 
-//var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
-var testeo = 0;  
+var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
+//var testeo = 0;  
 
 // Indicadores de estado para ver qué pregunta se lanza  
 var juiciorealizado = 0;
@@ -913,11 +913,12 @@ function siguienteTexto(){
 	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 	}
-    if (stateTexto == arrayInstruc.length - 3) {
+	htmlContenido=arrayInstruc[stateTexto];
+
+	if (stateTexto == arrayInstruc.length - 3) {
 		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
-			htmlContenido=arrayInstruc[stateTexto];
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
