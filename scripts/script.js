@@ -924,7 +924,7 @@ function siguienteTexto(){
 			stateTexto++;
 		}
 		htmlContenido=arrayInstruc[stateTexto];
-		if (stateTexto != arrayInstruc.length - 3) {
+		if (stateTexto == arrayInstruc.length - 3) {
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 	
