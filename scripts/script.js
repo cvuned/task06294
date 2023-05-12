@@ -913,9 +913,7 @@ function siguienteTexto(){
 	    	htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 	}
-	htmlContenido=arrayInstruc[stateTexto];
-
-	if (stateTexto == arrayInstruc.length - 3) {
+    if (stateTexto == arrayInstruc.length - 3) {
 		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
@@ -925,6 +923,11 @@ function siguienteTexto(){
 			console.log("No se va a mostrar la pregunta 5");
 			stateTexto++;
 		}
+		htmlContenido=arrayInstruc[stateTexto];
+		if (stateTexto != arrayInstruc.length - 3) {
+			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
+		}
+	
     }
 	
 	
