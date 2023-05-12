@@ -917,14 +917,13 @@ function siguienteTexto(){
 		
 		if (shouldShowFifthQuestion()) {
         // Show the 5th question
+			htmlContenido=arrayInstruc[stateTexto];
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
 			console.log("No se va a mostrar la pregunta 5");
 			stateTexto++;
 		}
-		htmlContenido=arrayInstruc[stateTexto];
-		htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
     }
 	
 	
