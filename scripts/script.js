@@ -673,15 +673,7 @@ function showJuicio(){
 
 function showNPS(){
 	// Esta nueva función va a dar a evaluar el NPS de 1 a 10.
-	// Get the elements by their class name
-	var separador2 = document.getElementsByClassName("separador2")[0];
-	var separador3 = document.getElementsByClassName("separador3")[0];
-
-	// Change their content
-	separador2.innerHTML = "5<br>|";
-	separador3.innerHTML = "10<br>|";
-
-
+	
 	// para ello reutilizamos la confianza pero voy a ver si al mostrar el resultado puedo mostrar redondeado a 10 
 	ocultar(divContingencia);
     ocultar(divTextos);
@@ -830,6 +822,15 @@ function cambiafase(){
 
 function ReseteoJuicios(){
 	document.getElementById('sliderJuicio').value=-10000;
+	
+	// Una vez que ya se ha lanzado el juicio, cambiamos la escala para el NPS
+	// Get the elements by their class name
+	var separador2 = document.getElementsByClassName("separador2")[0];
+	var separador3 = document.getElementsByClassName("separador3")[0];
+
+	// Change their content
+	separador2.innerHTML = "5<br>|";
+	separador3.innerHTML = "10<br>|";
 	//document.getElementById('sliderNPS').value=-10000;
 	document.getElementById('textInput').value="";
 }
