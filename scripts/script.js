@@ -767,6 +767,16 @@ function validaJuicio(){
 			FaseTest.Juicio=document.getElementById('textInput').value; 			// Añadido porque en el exp CVTD22XX2 solo guardamos en fase test
 			//console.log("--- LA HORA DEL JUICIO ESTÁ CERCA!!! ---");			// debug
 			//console.log(training[fase].Juicio);								// debug
+			
+			// Una vez que ya se ha lanzado el juicio, cambiamos la escala para el NPS
+			// Get the elements by their class name
+			var separador2 = document.getElementsByClassName("separador2")[0];
+			var separador3 = document.getElementsByClassName("separador3")[0];
+
+			// Change their content
+			separador2.innerHTML = "5<br>|";
+			separador3.innerHTML = "10<br>|";
+
 		}	
 		else if(training[fase].Confianza==999){
 			//training[fase].Confianza=document.getElementById('textInput').value;
@@ -822,15 +832,6 @@ function cambiafase(){
 
 function ReseteoJuicios(){
 	document.getElementById('sliderJuicio').value=-10000;
-	
-	// Una vez que ya se ha lanzado el juicio, cambiamos la escala para el NPS
-	// Get the elements by their class name
-	var separador2 = document.getElementsByClassName("separador2")[0];
-	var separador3 = document.getElementsByClassName("separador3")[0];
-
-	// Change their content
-	separador2.innerHTML = "5<br>|";
-	separador3.innerHTML = "10<br>|";
 	//document.getElementById('sliderNPS').value=-10000;
 	document.getElementById('textInput').value="";
 }
