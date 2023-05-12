@@ -19,8 +19,8 @@ var fecha="";           //contendrá la fecha/hora.
 var Cuestionario=[];    //contiene las respuestas al cuestionario de generalizacion
 var t0 = 0; 
 var t1 = 0; 
-var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
-//var testeo = 0;  
+//var testeo = 1;  // variable para reducir el número de ensayos durante el testeo del código // mover a 0 para producción 
+var testeo = 0;  
 
 // Indicadores de estado para ver qué pregunta se lanza  
 var juiciorealizado = 0;
@@ -679,7 +679,7 @@ function showNPS(){
     ocultar(divTextos);
  
 	textoNPS= "<p class=\"pregunta\">¿Recomendarías a un familiar o amigo tomar "+training[fase].nombreClave+"?</p>";
-	textoInstruccionesNPS="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: En absoluto.</li><li>10: Completamente seguro.</li></ul><p> Ignora las etiquetas (50 - 100) de la escala y asume que es una escala de 0 a 10.</p><br><br>";
+	textoInstruccionesNPS="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: En absoluto.</li><li>10: Completamente seguro.</li></ul></p><br><br>";
 	textoNPS = textoNPS.concat(textoInstruccionesNPS);
 	pintarHTML('divPreguntaNPS', textoNPS);
     
