@@ -704,7 +704,7 @@ function showConfianza(){
     ocultar(divTextos);
 
 	textoConfianza= "<p class=\"pregunta\">En una escala del 0 al 10, ¿cómo de probable es que recomendaras a un paciente tomar "+training[fase].nombreClave+"?</p>";
-	textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: No lo recomendaría en absoluto.</li><li>10: Lo recomendaría con total seguridad.</li></ul><p>Ignora las etiquetas (50 - 100) de la escala y asume que es una escala de 0 a 10.</p><br><br>";
+	textoInstrucciones="<p>Responde usando la siguiente escala, donde los números se interpretan así:</p><ul><li>0: No lo recomendaría en absoluto.</li><li>10: Lo recomendaría con total seguridad.</li></ul></p><br><br>";
 	textoConfianza = textoConfianza.concat(textoInstrucciones);
 	pintarHTML('divPregunta', textoConfianza);
     
@@ -931,7 +931,7 @@ function siguienteTexto(){
 			htmlContenido += `<br><textarea id="questionText${stateTexto}" rows="10" cols="50" style="width: 100%;" oninput="saveAnswer(${stateTexto})"></textarea>`;
 		}
 		else { // En este caso no hay que mostrar la pregunta 5 porque no se cumple la condición
-			console.log("No se va a mostrar la pregunta 5");
+			//console.log("No se va a mostrar la pregunta 5"); // Debug
 			stateTexto++;
 		}
 		htmlContenido=arrayInstruc[stateTexto];
